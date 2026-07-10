@@ -7,85 +7,99 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-align: center;
             padding: 60px 20px;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            text-align: center;
             min-height: 100vh;
         }
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+            font-size: 3.2rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
         }
         p {
-            font-size: 1.4rem;
-            max-width: 700px;
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: #aaaaaa;
+            max-width: 600px;
             margin: 0 auto 50px;
         }
         .social-buttons {
             margin-top: 40px;
         }
         .btn {
+            position: relative;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 12px;
             color: white;
             padding: 16px 32px;
-            margin: 12px;
+            margin: 10px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.15rem;
+            font-weight: 400;
+            overflow: hidden;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
         .btn:hover {
-            transform: translateY(-6px) scale(1.08);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transform: translateY(-5px);
         }
 
-        .btn-facebook {
-            background: #1877f2;
+        /* Efecto de gota al hacer clic */
+        .btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.25);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.6s, opacity 0.6s;
         }
-        .btn-instagram {
-            background: linear-gradient(135deg, #f56040, #c13584, #833ab4, #5851db);
+        .btn:active::after {
+            width: 300px;
+            height: 300px;
+            transform: scale(1);
+            opacity: 0;
         }
-        .btn-whatsapp {
-            background: #25d366;
-        }
+
+        /* Colores oficiales */
+        .btn-facebook { background: #1877f2; }
+        .btn-instagram { background: linear-gradient(135deg, #f56040, #c13584, #833ab4); }
+        .btn-tiktok { background: #000000; border: 1px solid #ff0050; }
+        .btn-whatsapp { background: #25d366; }
 
         .btn i {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
     </style>
 </head>
 <body>
-    <h1>¡Hola! Soy Edgar Ortuño</h1>
-    <p>Bienvenido a mi página web. Conéctate conmigo en mis redes:</p>
+    <h1>Edgar Ortuño</h1>
+    <p>Bienvenido a mi página personal</p>
 
     <div class="social-buttons">
         <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook">
-            <i class="fab fa-facebook-f"></i>
-            Facebook
+            <i class="fab fa-facebook-f"></i> Facebook
         </a>
         
         <a href="https://www.instagram.com/edgar_ortuno_" target="_blank" class="btn btn-instagram">
-            <i class="fab fa-instagram"></i>
-            Instagram
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        
+        <a href="https://www.tiktok.com/@edgar_ortuno_" target="_blank" class="btn btn-tiktok">
+            <i class="fab fa-tiktok"></i> TikTok
         </a>
         
         <a href="https://wa.me/59171274987" target="_blank" class="btn btn-whatsapp">
-            <i class="fab fa-whatsapp"></i>
-            WhatsApp
+            <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
     </div>
-
-    <p style="margin-top: 70px; font-size: 1rem; opacity: 0.9;">
-        Hecho con ❤️ usando GitHub Pages
-    </p>
 </body>
 </html>
