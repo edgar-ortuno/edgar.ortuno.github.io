@@ -175,35 +175,10 @@
             font-weight: 500;
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-            will-change: transform;
-            cursor: grab;
             user-select: none;
-        }
-        .btn:active {
-            cursor: grabbing;
         }
         .btn:hover {
             transform: translateY(-5px);
-        }
-
-        .btn.cayendo {
-            position: absolute;
-            animation: caerDesorden 1.2s ease forwards;
-        }
-        @keyframes caerDesorden {
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
-            100% { 
-                transform: translateY(calc(var(--desvioY, 0px) + 180px)) translateX(var(--desvioX, 0px)) rotate(var(--rotacion, 0deg)); 
-                opacity: 0.95; 
-            }
-        }
-
-        .btn.regresando {
-            animation: volver 0.8s ease forwards !important;
-        }
-        @keyframes volver {
-            0% { transform: translateY(var(--desvioY, 0px)) translateX(var(--desvioX, 0px)) rotate(var(--rotacion, 0deg)); opacity: 0.95; }
-            100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
         }
 
         .btn-facebook { background: #1877F2; color: white; }
@@ -217,26 +192,37 @@
             font-size: 1.6rem;
         }
 
-        .corazon-cafe {
+        /* Estilos para elementos que llueven */
+        .elemento-lluvia {
             position: fixed;
-            font-size: 1.5rem;
-            color: #8B4513;
             pointer-events: none;
             animation: lluvia 3s ease-in forwards;
             z-index: 500;
         }
+        .icono-lluvia {
+            font-size: 2rem;
+        }
+        .texto-2004 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e0e0e0;
+        }
+        body.modo-dia .texto-2004 {
+            color: #111;
+        }
+        .corazon-cafe {
+            font-size: 1.5rem;
+            color: #8B4513;
+        }
         .texto-edgar-lluvia {
-            position: fixed;
             font-size: 1.3rem;
             font-weight: 500;
             color: #e0e0e0;
-            pointer-events: none;
-            animation: lluvia 2.5s ease-in forwards;
-            z-index: 500;
         }
         body.modo-dia .texto-edgar-lluvia {
             color: #111;
         }
+
         @keyframes lluvia {
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
@@ -276,23 +262,23 @@
     <p>Bienvenid@ a mi página personal ✨</p>
 
     <div class="social-buttons" id="contenedor-redes">
-        <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook">
+        <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook" onclick="contarToquesIcono(event, 'facebook')">
             <i class="fab fa-facebook-f"></i> Facebook
         </a>
         
-        <a href="https://www.instagram.com/edgar_ortuno" target="_blank" class="btn btn-instagram">
+        <a href="https://www.instagram.com/edgar_ortuno" target="_blank" class="btn btn-instagram" onclick="contarToquesIcono(event, 'instagram')">
             <i class="fab fa-instagram"></i> Instagram
         </a>
         
-        <a href="https://www.tiktok.com/@edgar_ortuno" target="_blank" class="btn btn-tiktok">
+        <a href="https://www.tiktok.com/@edgar_ortuno" target="_blank" class="btn btn-tiktok" onclick="contarToquesIcono(event, 'tiktok')">
             <i class="fab fa-tiktok"></i> TikTok
         </a>
 
-        <a href="https://x.com/edgar_ortuno_" target="_blank" class="btn btn-x">
+        <a href="https://x.com/edgar_ortuno_" target="_blank" class="btn btn-x" onclick="contarToquesIcono(event, 'x')">
             <i class="fa-brands fa-x-twitter"></i> X
         </a>
         
-        <a href="https://wa.me/59171274987" target="_blank" class="btn btn-whatsapp">
+        <a href="https://wa.me/59171274987" target="_blank" class="btn btn-whatsapp" onclick="contarToquesIcono(event, 'whatsapp')">
             <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
     </div>
@@ -302,15 +288,19 @@
     <script>
         const menu = document.getElementById('miMenu');
         const iconoTema = document.getElementById('icono-tema');
-        const contenedor = document.getElementById('contenedor-redes');
-        let contadorToques = 0;
-        let contadorVolver = 0;
-        let temporizador;
-        let efectoActivo = false;
-        const botones = document.querySelectorAll('.btn');
-        let elementoArrastrado = null;
-        let offsetX, offsetY;
-        let posicionesFijas = new Map();
+        let contadorToquesIcono = 0;
+        let ultimoIcono = null;
+        let contadorToquesVacio = 0;
+        let temporizadorIcono;
+        let temporizadorVacio;
+
+        const iconos = {
+            facebook: '<i class="fab fa-facebook-f"></i>',
+            instagram: '<i class="fab fa-instagram"></i>',
+            tiktok: '<i class="fab fa-tiktok"></i>',
+            x: '<i class="fa-brands fa-x-twitter"></i>',
+            whatsapp: '<i class="fab fa-whatsapp"></i>'
+        };
 
         function cambiarTema() {
             document.body.classList.toggle('modo-dia');
@@ -333,134 +323,72 @@
             event.preventDefault();
             event.stopPropagation();
             menu.classList.remove('activo');
-            
-            const cantidad = 30;
-            for (let i = 0; i < cantidad; i++) {
-                setTimeout(() => {
-                    const corazon = document.createElement('div');
-                    corazon.className = 'corazon-cafe';
-                    corazon.innerHTML = '🤎';
-                    corazon.style.left = Math.random() * 100 + 'vw';
-                    corazon.style.animationDuration = (2 + Math.random() * 2) + 's';
-                    document.body.appendChild(corazon);
-                    
-                    setTimeout(() => corazon.remove(), 5000);
-                }, i * 50);
-            }
+            crearLluvia('corazon-cafe', '🤎', 30);
         }
 
         function lloverEdgar(event) {
             event.preventDefault();
             event.stopPropagation();
-            
-            const cantidad = 25;
-            for (let i = 0; i < cantidad; i++) {
-                setTimeout(() => {
-                    const texto = document.createElement('div');
-                    texto.className = 'texto-edgar-lluvia';
-                    texto.innerHTML = 'Edgar';
-                    texto.style.left = Math.random() * 100 + 'vw';
-                    texto.style.animationDuration = (1.8 + Math.random() * 1.5) + 's';
-                    document.body.appendChild(texto);
-                    
-                    setTimeout(() => texto.remove(), 4500);
-                }, i * 60);
-            }
-
+            crearLluvia('texto-edgar-lluvia', 'Edgar', 25);
             setTimeout(() => {
                 window.open('https://youtu.be/FZU8I9bPaTo', '_blank');
             }, 2000);
         }
 
-        function iniciarArrastre(e) {
-            if (!efectoActivo) return;
-            elementoArrastrado = this;
-            const toque = e.touches ? e.touches[0] : e;
-            const rect = elementoArrastrado.getBoundingClientRect();
-            offsetX = toque.clientX - rect.left;
-            offsetY = toque.clientY - rect.top;
-            elementoArrastrado.style.zIndex = '100';
-            e.preventDefault();
-        }
+        function contarToquesIcono(event, tipo) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if (ultimoIcono !== tipo) {
+                contadorToquesIcono = 0;
+                ultimoIcono = tipo;
+            }
+            
+            contadorToquesIcono++;
+            clearTimeout(temporizadorIcono);
+            
+            temporizadorIcono = setTimeout(() => {
+                contadorToquesIcono = 0;
+                ultimoIcono = null;
+            }, 1000);
 
-        function moverArrastre(e) {
-            if (!elementoArrastrado) return;
-            const toque = e.touches ? e.touches[0] : e;
-            const x = toque.clientX - offsetX - contenedor.getBoundingClientRect().left;
-            const y = toque.clientY - offsetY - contenedor.getBoundingClientRect().top;
-            elementoArrastrado.style.transform = `translate(${x}px, ${y}px) rotate(var(--rotacion, 0deg))`;
-            e.preventDefault();
-        }
-
-        function terminarArrastre() {
-            if (elementoArrastrado) {
-                const transform = elementoArrastrado.style.transform;
-                posicionesFijas.set(elementoArrastrado, transform);
-                elementoArrastrado.style.zIndex = '';
-                elementoArrastrado = null;
+            if (contadorToquesIcono === 3) {
+                contadorToquesIcono = 0;
+                ultimoIcono = null;
+                crearLluvia('icono-lluvia', iconos[tipo], 35);
             }
         }
-
-        botones.forEach(boton => {
-            boton.addEventListener('mousedown', iniciarArrastre);
-            boton.addEventListener('touchstart', iniciarArrastre);
-        });
-        document.addEventListener('mousemove', moverArrastre);
-        document.addEventListener('touchmove', moverArrastre);
-        document.addEventListener('mouseup', terminarArrastre);
-        document.addEventListener('touchend', terminarArrastre);
 
         document.addEventListener('click', function(e) {
             if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral') || e.target.closest('.enlace-edgar')) return;
             
-            contadorToques++;
-            contadorVolver++;
-            clearTimeout(temporizador);
+            contadorToquesVacio++;
+            clearTimeout(temporizadorVacio);
             
-            temporizador = setTimeout(() => {
-                contadorToques = 0;
-                contadorVolver = 0;
+            temporizadorVacio = setTimeout(() => {
+                contadorToquesVacio = 0;
             }, 1000);
 
-            if (contadorToques === 3 && !efectoActivo) {
-                efectoActivo = true;
-                contadorToques = 0;
-                contadorVolver = 0;
-                posicionesFijas.clear();
-                
-                botones.forEach((boton, indice) => {
-                    const desvioX = (Math.random() - 0.5) * 220;
-                    const desvioY = (Math.random() - 0.5) * 60;
-                    const rotacion = (Math.random() - 0.5) * 45;
-                    
-                    boton.style.setProperty('--desvioX', desvioX + 'px');
-                    boton.style.setProperty('--desvioY', desvioY + 'px');
-                    boton.style.setProperty('--rotacion', rotacion + 'deg');
-                    boton.classList.remove('regresando');
-                    
-                    setTimeout(() => {
-                        boton.classList.add('cayendo');
-                    }, indice * 80);
-                });
-            }
-
-            if (contadorVolver === 2 && efectoActivo) {
-                efectoActivo = false;
-                contadorToques = 0;
-                contadorVolver = 0;
-                posicionesFijas.clear();
-                
-                botones.forEach((boton, indice) => {
-                    boton.classList.remove('cayendo');
-                    setTimeout(() => {
-                        boton.classList.add('regresando');
-                    }, indice * 60);
-                    setTimeout(() => {
-                        boton.style.transform = '';
-                    }, 800);
-                });
+            if (contadorToquesVacio === 2) {
+                contadorToquesVacio = 0;
+                crearLluvia('texto-2004', '2004', 30);
             }
         });
+
+        function crearLluvia(clase, contenido, cantidad) {
+            for (let i = 0; i < cantidad; i++) {
+                setTimeout(() => {
+                    const elemento = document.createElement('div');
+                    elemento.className = `elemento-lluvia ${clase}`;
+                    elemento.innerHTML = contenido;
+                    elemento.style.left = Math.random() * 100 + 'vw';
+                    elemento.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+                    document.body.appendChild(elemento);
+                    
+                    setTimeout(() => elemento.remove(), 5000);
+                }, i * 50);
+            }
+        }
     </script>
 </body>
 </html>
