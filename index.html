@@ -14,9 +14,9 @@
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 0;
+            padding: 70px 20px 60px;
             background: #000000;
-            color: #ffffff;
+            color: #e0e0e0;
             text-align: center;
             min-height: 100vh;
             position: relative;
@@ -25,7 +25,10 @@
         }
         body.modo-dia {
             background: #ffffff;
-            color: #000000;
+            color: #111111;
+        }
+        body.modo-dia p {
+            color: #444444;
         }
 
         .boton-menu {
@@ -42,6 +45,7 @@
             cursor: pointer;
             z-index: 1000;
             border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
         body.modo-dia .boton-menu {
@@ -67,6 +71,7 @@
             cursor: pointer;
             z-index: 1000;
             transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         body.modo-dia .boton-tema {
             background: #000000;
@@ -112,30 +117,40 @@
             background: rgba(255, 255, 255, 0.08);
             padding-left: 22px;
         }
-
-        .bienvenida {
-            position: fixed;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7rem;
-            font-weight: 100;
-            opacity: 0.6;
-            z-index: 50;
+        body.modo-dia .menu-lateral a:hover {
+            background: rgba(0, 0, 0, 0.08);
         }
 
-        /* Tamaño ajustado: casi igual al anterior, solo un 3% más grande */
+        .enlace-edgar {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        .enlace-edgar:hover {
+            color: #8B4513;
+            text-decoration: underline;
+        }
+
         h1 {
-            font-size: 3.1rem; /* Antes era 3rem, ahora 3.1rem = aprox +3% */
-            font-weight: 700; /* Sigue siendo grueso */
-            margin: 50px 0 20px;
-            letter-spacing: 1px;
-            padding: 0 15px;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 12px;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+        p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #aaaaaa;
+            max-width: 600px;
+            margin: 0 auto 45px;
+            transition: color 0.4s ease;
         }
 
         .social-buttons {
-            position: fixed;
-            top: calc(50% + 120px);
+            position: absolute;
+            top: calc(50% + 40px);
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -144,7 +159,6 @@
             gap: 16px;
             width: 100%;
             max-width: 300px;
-            z-index: 10;
         }
 
         .btn {
@@ -158,7 +172,7 @@
             border-radius: 28px;
             text-decoration: none;
             font-size: 1.15rem;
-            font-weight: 400;
+            font-weight: 500;
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(0,0,0,0.35);
             user-select: none;
@@ -168,10 +182,7 @@
         }
 
         .btn i {
-            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
             font-size: 1.6rem;
-            font-weight: 900;
-            font-style: normal;
         }
 
         .btn-facebook { background: #1877F2; color: white; }
@@ -188,14 +199,6 @@
             z-index: 500;
             top: 15px;
         }
-        .texto-2004 {
-            font-size: 2rem;
-            font-weight: 300;
-            color: #ffffff;
-        }
-        body.modo-dia .texto-2004 {
-            color: #111;
-        }
         .corazon-cafe {
             font-size: 1.5rem;
             color: #8B4513;
@@ -211,20 +214,18 @@
             bottom: 12px;
             right: 20px;
             font-size: 0.85rem;
-            color: #cccccc;
+            color: #333;
             font-weight: 300;
             text-decoration: none;
             transition: color 0.4s ease;
             z-index: 1;
         }
         body.modo-dia .marca {
-            color: #555;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
-    <p class="bienvenida">Bienvenid@ a : Página..</p>
-
     <button class="boton-menu" onclick="alternarMenu(event)">
         <i class="fas fa-bars"></i>
     </button>
@@ -239,7 +240,8 @@
         <a href="#" onclick="mostrarAcercaDe(event)">Acerca De</a>
     </div>
 
-    <h1>ESTAMOS CONFIGURANDO...</h1>
+    <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar Ortuño</a></h1>
+    <p>Bienvenid@ a mi página personal ✨</p>
 
     <div class="social-buttons" id="contenedor-redes">
         <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook">
@@ -268,8 +270,6 @@
     <script>
         const menu = document.getElementById('miMenu');
         const iconoTema = document.getElementById('icono-tema');
-        let contadorToquesVacio = 0;
-        let temporizadorVacio;
 
         function cambiarTema() {
             document.body.classList.toggle('modo-dia');
@@ -301,22 +301,6 @@
             menu.classList.remove('activo');
             crearLluvia('corazon-cafe', '🤎', 30);
         }
-
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral') || e.target.closest('.bienvenida')) return;
-            
-            contadorToquesVacio++;
-            clearTimeout(temporizadorVacio);
-            
-            temporizadorVacio = setTimeout(() => {
-                contadorToquesVacio = 0;
-            }, 1000);
-
-            if (contadorToquesVacio === 2) {
-                contadorToquesVacio = 0;
-                crearLluvia('texto-2004', '2004', 30);
-            }
-        });
 
         function crearLluvia(clase, contenido, cantidad) {
             for (let i = 0; i < cantidad; i++) {
