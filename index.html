@@ -15,12 +15,14 @@
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             padding: 60px 20px;
-            background: radial-gradient(circle at top, #1a1a1a 0%, #050505 100%);
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             color: #e0e0e0;
             text-align: center;
             min-height: 100vh;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden;
         }
         body::before {
             content: '';
@@ -29,8 +31,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(8px);
+            background: radial-gradient(circle at top, rgba(26,26,26,0.4) 0%, rgba(5,5,5,0.6) 100%);
             z-index: -1;
             pointer-events: none;
         }
@@ -113,6 +114,7 @@
             align-items: center;
             gap: 15px;
             position: relative;
+            min-height: 400px;
         }
 
         /* Botones y animación de caída */
@@ -130,37 +132,23 @@
             font-weight: 400;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            will-change: transform;
         }
         .btn:hover {
             transform: translateY(-5px);
         }
-        .btn::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.25);
-            border-radius: 50%;
-            transform: scale(0);
-            transition: transform 0.6s, opacity 0.6s;
-        }
-        .btn:active::after {
-            width: 300px;
-            height: 300px;
-            transform: scale(1);
-            opacity: 0;
-        }
 
-        /* Animación de caída */
+        /* Animación de caída desordenada DENTRO de la pantalla */
         .btn.cayendo {
-            animation: caer 1.2s ease forwards;
+            position: absolute;
+            animation: caerDesorden 1.5s ease forwards;
         }
-        @keyframes caer {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            60% { transform: translateY(400px) rotate(10deg); opacity: 1; }
-            75% { transform: translateY(370px) rotate(-5deg); }
-            90% { transform: translateY(400px) rotate(3deg); }
-            100% { transform: translateY(420px) rotate(0deg); opacity: 0.7; pointer-events: none; }
+        @keyframes caerDesorden {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+            100% { 
+                transform: translateY(calc(150px + var(--desvioY) * 1px)) translateX(calc(var(--desvioX) * 1px)) rotate(var(--rotacion)); 
+                opacity: 0.9; 
+            }
         }
 
         /* Colores de los botones */
@@ -184,6 +172,7 @@
             font-weight: 300;
             text-decoration: none;
             transition: color 0.3s;
+            z-index: 1;
         }
         .marca:hover {
             color: #555;
@@ -232,6 +221,8 @@
         const menu = document.getElementById('miMenu');
         let contadorToques = 0;
         let temporizador;
+        let efectoActivo = false;
+        const botones = document.querySelectorAll('.btn');
 
         // Abrir/cerrar menú
         function alternarMenu(event) {
@@ -251,23 +242,53 @@
             contadorToques++;
             clearTimeout(temporizador);
             
-            // Si pasan 1 segundo sin tocar, se reinicia el contador
             temporizador = setTimeout(() => {
                 contadorToques = 0;
             }, 1000);
 
-            // Al llegar a 5 toques
-            if (contadorToques === 5) {
+            if (contadorToques === 5 && !efectoActivo) {
+                efectoActivo = true;
                 contadorToques = 0;
-                const botones = document.querySelectorAll('.btn');
+                
                 botones.forEach((boton, indice) => {
-                    // Cada botón cae con un pequeño retraso
+                    // Valores aleatorios para desordenar y voltear
+                    const desvioX = (Math.random() - 0.5) * 180;
+                    const desvioY = Math.random() * 80;
+                    const rotacion = (Math.random() - 0.5) * 40;
+                    
+                    boton.style.setProperty('--desvioX', desvioX);
+                    boton.style.setProperty('--desvioY', desvioY);
+                    boton.style.setProperty('--rotacion', rotacion + 'deg');
+                    
                     setTimeout(() => {
                         boton.classList.add('cayendo');
-                    }, indice * 120);
+                    }, indice * 100);
                 });
             }
         });
+
+        // Movimiento con el giroscopio/acelerómetro del celular
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', function(event) {
+                if (!efectoActivo) return;
+                
+                const giroX = event.beta || 0;  // Inclinación arriba/abajo
+                const giroY = event.gamma || 0; // Inclinación izquierda/derecha
+                
+                botones.forEach((boton, indice) => {
+                    const velocidad = 0.8 + (indice * 0.1);
+                    const moverX = giroY * velocidad;
+                    const moverY = giroX * velocidad;
+                    
+                    const estiloActual = boton.style.transform || '';
+                    const baseX = parseFloat(boton.style.getPropertyValue('--desvioX')) || 0;
+                    const baseY = parseFloat(boton.style.getPropertyValue('--desvioY')) || 0;
+                    const rotacion = boton.style.getPropertyValue('--rotacion') || '0deg';
+                    
+                    boton.style.transform = `translateY(calc(${baseY}px + ${moverY}px)) translateX(calc(${baseX}px + ${moverX}px)) rotate(${rotacion})`;
+                });
+            });
+        }
     </script>
 </body>
 </html>
