@@ -164,12 +164,12 @@
 </head>
 <body>
     <!-- Botón de menú con 3 barras -->
-    <button class="boton-menu" onclick="alternarMenu()">
+    <button class="boton-menu" onclick="alternarMenu(event)">
         <i class="fas fa-bars"></i>
     </button>
 
     <!-- Menú lateral con el texto actualizado -->
-    <div class="menu-lateral" id="miMenu">
+    <div class="menu-lateral" id="miMenu" onclick="event.stopPropagation()">
         <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">MÁS INFORMACIÓN :)</a>
     </div>
 
@@ -201,12 +201,21 @@
     <!-- Texto "edgr." con enlace -->
     <a href="https://youtu.be/XjA7tvuqXG4?si=sW4pXYvZqhJa7T8Z" target="_blank" class="marca">edgr.</a>
 
-    <!-- Código para abrir y cerrar el menú -->
+    <!-- Código para abrir, cerrar y tocar fuera -->
     <script>
-        function alternarMenu() {
-            const menu = document.getElementById('miMenu');
+        const menu = document.getElementById('miMenu');
+
+        function alternarMenu(event) {
+            event.stopPropagation();
             menu.classList.toggle('activo');
         }
+
+        // Cerrar al tocar cualquier parte fuera
+        document.addEventListener('click', function() {
+            if (menu.classList.contains('activo')) {
+                menu.classList.remove('activo');
+            }
+        });
     </script>
 </body>
 </html>
