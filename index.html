@@ -10,6 +10,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            touch-action: manipulation;
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -136,12 +137,12 @@
             transition: color 0.4s ease;
         }
 
-        /* Contenedor de redes hacia la parte baja */
+        /* Contenedor de redes CENTRADO en pantalla */
         .social-buttons {
             position: absolute;
-            bottom: 8vh;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -159,13 +160,18 @@
             gap: 12px;
             width: 100%;
             padding: 16px 32px;
-            border-radius: 28px; /* Más redondeado */
+            border-radius: 28px;
             text-decoration: none;
             font-size: 1.15rem;
             font-weight: 500;
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(0,0,0,0.35);
             will-change: transform;
+            cursor: grab;
+            user-select: none;
+        }
+        .btn:active {
+            cursor: grabbing;
         }
         .btn:hover {
             transform: translateY(-5px);
@@ -174,17 +180,26 @@
         /* Animación de caída desordenada */
         .btn.cayendo {
             position: absolute;
-            animation: caerDesorden 1.5s ease forwards;
+            animation: caerDesorden 1.2s ease forwards;
         }
         @keyframes caerDesorden {
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
             100% { 
-                transform: translateY(calc(150px + var(--desvioY) * 1px)) translateX(calc(var(--desvioX) * 1px)) rotate(var(--rotacion)); 
-                opacity: 0.9; 
+                transform: translateY(var(--desvioY, 0px)) translateX(var(--desvioX, 0px)) rotate(var(--rotacion, 0deg)); 
+                opacity: 0.95; 
             }
         }
 
-        /* Colores MUCHO más vibrantes */
+        /* Animación de regreso */
+        .btn.regresando {
+            animation: volver 0.8s ease forwards !important;
+        }
+        @keyframes volver {
+            0% { transform: translateY(var(--desvioY, 0px)) translateX(var(--desvioX, 0px)) rotate(var(--rotacion, 0deg)); opacity: 0.95; }
+            100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+        }
+
+        /* Colores mucho más vibrantes */
         .btn-facebook { background: #1877F2; color: white; }
         .btn-instagram { background: linear-gradient(135deg, #FF6C5C, #FF2E63, #A855F7); color: white; }
         .btn-tiktok { background: #FFFFFF; color: #000000; border: 2px solid #000000; }
@@ -259,12 +274,16 @@
     <script>
         const menu = document.getElementById('miMenu');
         const iconoTema = document.getElementById('icono-tema');
+        const contenedor = document.getElementById('contenedor-redes');
         let contadorToques = 0;
+        let contadorVolver = 0;
         let temporizador;
         let efectoActivo = false;
         const botones = document.querySelectorAll('.btn');
+        let elementoArrastrado = null;
+        let offsetX, offsetY;
 
-        // Cambiar entre sol y luna + fondo negro/blanco
+        // Cambiar entre sol y luna
         function cambiarTema() {
             document.body.classList.toggle('modo-dia');
             const esDia = document.body.classList.contains('modo-dia');
@@ -284,56 +303,96 @@
             }
         });
 
-        // Contar 5 toques y activar caída
-        document.addEventListener('click', function() {
+        // Funciones para arrastrar iconos
+        function iniciarArrastre(e) {
+            if (!efectoActivo) return;
+            elementoArrastrado = this;
+            const toque = e.touches ? e.touches[0] : e;
+            const rect = elementoArrastrado.getBoundingClientRect();
+            offsetX = toque.clientX - rect.left;
+            offsetY = toque.clientY - rect.top;
+            elementoArrastrado.style.zIndex = '100';
+            e.preventDefault();
+        }
+
+        function moverArrastre(e) {
+            if (!elementoArrastrado) return;
+            const toque = e.touches ? e.touches[0] : e;
+            const x = toque.clientX - offsetX - contenedor.getBoundingClientRect().left;
+            const y = toque.clientY - offsetY - contenedor.getBoundingClientRect().top;
+            elementoArrastrado.style.transform = `translate(${x}px, ${y}px) rotate(var(--rotacion, 0deg))`;
+            e.preventDefault();
+        }
+
+        function terminarArrastre() {
+            if (elementoArrastrado) {
+                elementoArrastrado.style.zIndex = '';
+                elementoArrastrado = null;
+            }
+        }
+
+        // Asignar eventos de arrastre
+        botones.forEach(boton => {
+            boton.addEventListener('mousedown', iniciarArrastre);
+            boton.addEventListener('touchstart', iniciarArrastre);
+        });
+        document.addEventListener('mousemove', moverArrastre);
+        document.addEventListener('touchmove', moverArrastre);
+        document.addEventListener('mouseup', terminarArrastre);
+        document.addEventListener('touchend', terminarArrastre);
+
+        // Contar toques: 3 para caer, 5 para volver
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral')) return;
+            
             contadorToques++;
+            contadorVolver++;
             clearTimeout(temporizador);
             
             temporizador = setTimeout(() => {
                 contadorToques = 0;
+                contadorVolver = 0;
             }, 1000);
 
-            if (contadorToques === 5 && !efectoActivo) {
+            // 3 toques: caer
+            if (contadorToques === 3 && !efectoActivo) {
                 efectoActivo = true;
                 contadorToques = 0;
+                contadorVolver = 0;
                 
                 botones.forEach((boton, indice) => {
-                    const desvioX = (Math.random() - 0.5) * 180;
-                    const desvioY = Math.random() * 80;
-                    const rotacion = (Math.random() - 0.5) * 40;
+                    const desvioX = (Math.random() - 0.5) * 220;
+                    const desvioY = (Math.random() - 0.5) * 160;
+                    const rotacion = (Math.random() - 0.5) * 45;
                     
-                    boton.style.setProperty('--desvioX', desvioX);
-                    boton.style.setProperty('--desvioY', desvioY);
+                    boton.style.setProperty('--desvioX', desvioX + 'px');
+                    boton.style.setProperty('--desvioY', desvioY + 'px');
                     boton.style.setProperty('--rotacion', rotacion + 'deg');
+                    boton.classList.remove('regresando');
                     
                     setTimeout(() => {
                         boton.classList.add('cayendo');
-                    }, indice * 100);
+                    }, indice * 80);
+                });
+            }
+
+            // 5 toques: volver
+            if (contadorVolver === 5 && efectoActivo) {
+                efectoActivo = false;
+                contadorToques = 0;
+                contadorVolver = 0;
+                
+                botones.forEach((boton, indice) => {
+                    boton.classList.remove('cayendo');
+                    setTimeout(() => {
+                        boton.classList.add('regresando');
+                    }, indice * 60);
+                    setTimeout(() => {
+                        boton.style.transform = '';
+                    }, 800);
                 });
             }
         });
-
-        // Movimiento con el giroscopio
-        if (window.DeviceMotionEvent) {
-            window.addEventListener('devicemotion', function(event) {
-                if (!efectoActivo) return;
-                
-                const giroX = event.beta || 0;
-                const giroY = event.gamma || 0;
-                
-                botones.forEach((boton, indice) => {
-                    const velocidad = 0.8 + (indice * 0.1);
-                    const moverX = giroY * velocidad;
-                    const moverY = giroX * velocidad;
-                    
-                    const baseX = parseFloat(boton.style.getPropertyValue('--desvioX')) || 0;
-                    const baseY = parseFloat(boton.style.getPropertyValue('--desvioY')) || 0;
-                    const rotacion = boton.style.getPropertyValue('--rotacion') || '0deg';
-                    
-                    boton.style.transform = `translateY(calc(${baseY}px + ${moverY}px)) translateX(calc(${baseX}px + ${moverX}px)) rotate(${rotacion})`;
-                });
-            });
-        }
     </script>
 </body>
 </html>
