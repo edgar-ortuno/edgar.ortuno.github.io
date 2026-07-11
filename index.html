@@ -15,7 +15,7 @@
         body {
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             font-weight: 300;
-            padding: 70px 20px 60px;
+            padding: 70px 20px 80px;
             background: #000000;
             color: #ffffff;
             text-align: center;
@@ -84,10 +84,9 @@
 
         .boton-archivos {
             position: fixed;
-            /* ✅ Bajado un poco: antes 15px, ahora 22px */
             bottom: 22px;
             left: 15px;
-            /* 🌙 MODO NOCHE: Fondo negro, texto blanco */
+            /* ☀️ MODO DÍA: Fondo negro, letras blancas */
             background: #000000;
             color: #ffffff;
             border: 1px solid rgba(255,255,255,0.3);
@@ -99,7 +98,7 @@
             z-index: 1000;
             transition: all 0.4s ease;
         }
-        /* ☀️ MODO DÍA: Fondo blanco, texto negro */
+        /* 🌙 MODO NOCHE: Fondo blanco, letras negras */
         body.modo-dia .boton-archivos {
             background: #ffffff;
             color: #000000;
@@ -153,24 +152,16 @@
             background: rgba(0, 0, 0, 0.08);
         }
 
-        .enlace-edgar {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-        .enlace-edgar:hover {
-            color: #8B4513;
-            text-decoration: underline;
-        }
-
-        h1 {
+        .nombre-titulo {
             font-size: 3rem;
             font-weight: 300;
             margin-bottom: 12px;
             margin-top: 10px;
             letter-spacing: 2px;
+            color: inherit;
+            cursor: default;
         }
+
         p {
             font-size: 1.2rem;
             font-weight: 300;
@@ -181,8 +172,9 @@
         }
 
         .social-buttons {
+            /* ⬆️ SUBIDOS HACIA ARRIBA */
             position: absolute;
-            top: calc(50% + 40px);
+            top: calc(50% + 10px);
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -244,19 +236,22 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        .marca {
+        /* ✍️ FIRMA ESTILO ESCRITA A MANO */
+        .firma {
             position: fixed;
-            bottom: 12px;
-            right: 20px;
-            font-size: 0.85rem;
-            color: #cccccc;
-            font-weight: 300;
+            bottom: 10px;
+            right: 25px;
+            font-family: 'Segoe Script', 'Brush Script MT', cursive;
+            font-size: 1.3rem;
+            color: #8B4513;
+            font-weight: normal;
             text-decoration: none;
             transition: color 0.4s ease;
             z-index: 1;
+            opacity: 0.85;
         }
-        body.modo-dia .marca {
-            color: #555555;
+        body.modo-dia .firma {
+            color: #6B3E26;
         }
     </style>
 </head>
@@ -277,7 +272,8 @@
         <a href="#" onclick="mostrarAcercaDe(event)">Acerca De</a>
     </div>
 
-    <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar Ortuño</a></h1>
+    <!-- 🚫 YA NO TIENE ENLACE -->
+    <h1 class="nombre-titulo">Edgar Ortuño</h1>
     <p>Bienvenid@ a mi página personal ✨</p>
 
     <div class="social-buttons" id="contenedor-redes">
@@ -302,7 +298,8 @@
         </a>
     </div>
 
-    <a href="https://youtu.be/XjA7tvuqXG4?si=sW4pXYvZqhJa7T8Z" target="_blank" class="marca">edgr.</a>
+    <!-- ✍️ FIRMA ABAJO CON ESTILO -->
+    <div class="firma">edgr.</div>
 
     <script>
         const menu = document.getElementById('miMenu');
