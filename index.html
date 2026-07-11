@@ -84,7 +84,7 @@
             transform: scale(1.1);
         }
 
-        /* Menú lateral con efecto vidrio y símbolo ℹ️ */
+        /* Menú lateral */
         .menu-lateral {
             position: fixed;
             left: -150px;
@@ -96,8 +96,11 @@
             -webkit-backdrop-filter: blur(25px);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 70px;
-            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
             z-index: 999;
+            transition: left 0.3s ease;
         }
         body.modo-dia .menu-lateral {
             background: rgba(0, 0, 0, 0.06);
@@ -122,6 +125,17 @@
             background: rgba(0, 0, 0, 0.08);
         }
 
+        /* Enlace en la palabra Edgar */
+        .enlace-edgar {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .enlace-edgar:hover {
+            color: #8B4513; /* Color café */
+            text-decoration: underline;
+        }
+
         h1 {
             font-size: 3rem;
             font-weight: 300;
@@ -137,7 +151,7 @@
             transition: color 0.4s ease;
         }
 
-        /* Contenedor de redes CENTRADO en pantalla */
+        /* Contenedor de redes CENTRADO */
         .social-buttons {
             position: absolute;
             top: 50%;
@@ -211,6 +225,20 @@
             font-size: 1.6rem;
         }
 
+        /* Estilo de corazones cayendo */
+        .corazon-cafe {
+            position: fixed;
+            font-size: 1.5rem;
+            color: #8B4513;
+            pointer-events: none;
+            animation: lluvia 3s ease-in forwards;
+            z-index: 500;
+        }
+        @keyframes lluvia {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
         /* Texto "edgr." */
         .marca {
             position: fixed;
@@ -239,12 +267,13 @@
         <i class="fas fa-moon" id="icono-tema"></i>
     </button>
 
-    <!-- Menú lateral con símbolo ℹ️ -->
+    <!-- Menú lateral con nueva opción -->
     <div class="menu-lateral" id="miMenu" onclick="event.stopPropagation()">
-        <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">ℹ️ Más Información. :)</a>
+        <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">Más Información. :)</a>
+        <a href="#" onclick="lloverCorazones(event)">Ortuño :(</a>
     </div>
 
-    <h1>Edgar Ortuño</h1>
+    <h1><a href="https://youtu.be/eBba35M_9nM?si=8aHOJTVng8Iyjicu" target="_blank" class="enlace-edgar">Edgar</a> Ortuño</h1>
     <p>Bienvenid@ a mi página personal ✨</p>
 
     <div class="social-buttons" id="contenedor-redes">
@@ -303,6 +332,27 @@
             }
         });
 
+        // Función lluvia de corazones cafés
+        function lloverCorazones(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            menu.classList.remove('activo');
+            
+            const cantidad = 30;
+            for (let i = 0; i < cantidad; i++) {
+                setTimeout(() => {
+                    const corazon = document.createElement('div');
+                    corazon.className = 'corazon-cafe';
+                    corazon.innerHTML = '🤎';
+                    corazon.style.left = Math.random() * 100 + 'vw';
+                    corazon.style.animationDuration = (2 + Math.random() * 2) + 's';
+                    document.body.appendChild(corazon);
+                    
+                    setTimeout(() => corazon.remove(), 5000);
+                }, i * 50);
+            }
+        }
+
         // Funciones para arrastrar iconos
         function iniciarArrastre(e) {
             if (!efectoActivo) return;
@@ -341,9 +391,9 @@
         document.addEventListener('mouseup', terminarArrastre);
         document.addEventListener('touchend', terminarArrastre);
 
-        // Contar toques: 3 para caer, 5 para volver
+        // Contar toques: 3 para caer, 2 para volver
         document.addEventListener('click', function(e) {
-            if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral')) return;
+            if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral') || e.target.closest('.enlace-edgar')) return;
             
             contadorToques++;
             contadorVolver++;
@@ -376,8 +426,8 @@
                 });
             }
 
-            // 5 toques: volver
-            if (contadorVolver === 5 && efectoActivo) {
+            // 2 toques: volver
+            if (contadorVolver === 2 && efectoActivo) {
                 efectoActivo = false;
                 contadorToques = 0;
                 contadorVolver = 0;
