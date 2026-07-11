@@ -14,7 +14,7 @@
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 80px 20px 60px; /* Ajuste: más espacio arriba para bajar contenido */
+            padding: 100px 20px 60px;
             background: #000000;
             color: #e0e0e0;
             text-align: center;
@@ -23,7 +23,6 @@
             overflow: hidden;
             transition: background 0.4s ease, color 0.4s ease;
         }
-        /* Modo claro */
         body.modo-dia {
             background: #ffffff;
             color: #111111;
@@ -32,7 +31,6 @@
             color: #444444;
         }
 
-        /* Botón de menú con efecto vidrio líquido */
         .boton-menu {
             position: fixed;
             top: 15px;
@@ -59,7 +57,6 @@
             transform: scale(1.05);
         }
 
-        /* Botón de cambio de tema */
         .boton-tema {
             position: fixed;
             top: 15px;
@@ -84,7 +81,6 @@
             transform: scale(1.1);
         }
 
-        /* Menú lateral */
         .menu-lateral {
             position: fixed;
             left: -150px;
@@ -125,14 +121,13 @@
             background: rgba(0, 0, 0, 0.08);
         }
 
-        /* Enlace en la palabra Edgar */
         .enlace-edgar {
             color: inherit;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .enlace-edgar:hover {
-            color: #8B4513; /* Color café */
+            color: #8B4513;
             text-decoration: underline;
         }
 
@@ -140,7 +135,7 @@
             font-size: 3rem;
             font-weight: 300;
             margin-bottom: 12px;
-            margin-top: 20px; /* Baja un poco el título */
+            margin-top: 40px;
             letter-spacing: 2px;
         }
         p {
@@ -148,14 +143,13 @@
             font-weight: 300;
             color: #aaaaaa;
             max-width: 600px;
-            margin: 0 auto 45px; /* Menos espacio antes de los botones */
+            margin: 0 auto 55px;
             transition: color 0.4s ease;
         }
 
-        /* Contenedor de redes: bajado ligeramente */
         .social-buttons {
             position: absolute;
-            top: calc(50% + 40px); /* Bajado un poco más del centro */
+            top: calc(50% + 80px);
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -166,7 +160,6 @@
             max-width: 300px;
         }
 
-        /* Botones con más curvas y colores vibrantes */
         .btn {
             position: relative;
             display: inline-flex;
@@ -192,7 +185,6 @@
             transform: translateY(-5px);
         }
 
-        /* Animación de caída: ahora bajan más */
         .btn.cayendo {
             position: absolute;
             animation: caerDesorden 1.2s ease forwards;
@@ -200,12 +192,11 @@
         @keyframes caerDesorden {
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
             100% { 
-                transform: translateY(calc(var(--desvioY, 0px) + 60px)) translateX(var(--desvioX, 0px)) rotate(var(--rotacion, 0deg)); 
+                transform: translateY(calc(var(--desvioY, 0px) + 180px)) translateX(var(--desvioX, 0px)) rotate(var(--rotacion, 0deg)); 
                 opacity: 0.95; 
             }
         }
 
-        /* Animación de regreso */
         .btn.regresando {
             animation: volver 0.8s ease forwards !important;
         }
@@ -214,7 +205,6 @@
             100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
         }
 
-        /* Colores mucho más vibrantes */
         .btn-facebook { background: #1877F2; color: white; }
         .btn-instagram { background: linear-gradient(135deg, #FF6C5C, #FF2E63, #A855F7); color: white; }
         .btn-tiktok { background: #FFFFFF; color: #000000; border: 2px solid #000000; }
@@ -226,7 +216,6 @@
             font-size: 1.6rem;
         }
 
-        /* Estilo de corazones cayendo */
         .corazon-cafe {
             position: fixed;
             font-size: 1.5rem;
@@ -240,7 +229,6 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Texto "edgr." */
         .marca {
             position: fixed;
             bottom: 12px;
@@ -258,17 +246,14 @@
     </style>
 </head>
 <body>
-    <!-- Botón de menú -->
     <button class="boton-menu" onclick="alternarMenu(event)">
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Botón de cambio de tema sol/luna -->
     <button class="boton-tema" onclick="cambiarTema()">
         <i class="fas fa-moon" id="icono-tema"></i>
     </button>
 
-    <!-- Menú lateral con nueva opción -->
     <div class="menu-lateral" id="miMenu" onclick="event.stopPropagation()">
         <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">Más Información. :)</a>
         <a href="#" onclick="lloverCorazones(event)">Ortuño :(</a>
@@ -313,27 +298,23 @@
         let elementoArrastrado = null;
         let offsetX, offsetY;
 
-        // Cambiar entre sol y luna
         function cambiarTema() {
             document.body.classList.toggle('modo-dia');
             const esDia = document.body.classList.contains('modo-dia');
             iconoTema.className = esDia ? 'fas fa-sun' : 'fas fa-moon';
         }
 
-        // Abrir/cerrar menú
         function alternarMenu(event) {
             event.stopPropagation();
             menu.classList.toggle('activo');
         }
 
-        // Cerrar menú al tocar fuera
         document.addEventListener('click', function() {
             if (menu.classList.contains('activo')) {
                 menu.classList.remove('activo');
             }
         });
 
-        // Función lluvia de corazones cafés
         function lloverCorazones(event) {
             event.preventDefault();
             event.stopPropagation();
@@ -354,7 +335,6 @@
             }
         }
 
-        // Funciones para arrastrar iconos
         function iniciarArrastre(e) {
             if (!efectoActivo) return;
             elementoArrastrado = this;
@@ -382,7 +362,6 @@
             }
         }
 
-        // Asignar eventos de arrastre
         botones.forEach(boton => {
             boton.addEventListener('mousedown', iniciarArrastre);
             boton.addEventListener('touchstart', iniciarArrastre);
@@ -392,7 +371,6 @@
         document.addEventListener('mouseup', terminarArrastre);
         document.addEventListener('touchend', terminarArrastre);
 
-        // Contar toques: 3 para caer, 2 para volver
         document.addEventListener('click', function(e) {
             if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral') || e.target.closest('.enlace-edgar')) return;
             
@@ -405,7 +383,6 @@
                 contadorVolver = 0;
             }, 1000);
 
-            // 3 toques: caer
             if (contadorToques === 3 && !efectoActivo) {
                 efectoActivo = true;
                 contadorToques = 0;
@@ -413,7 +390,7 @@
                 
                 botones.forEach((boton, indice) => {
                     const desvioX = (Math.random() - 0.5) * 220;
-                    const desvioY = (Math.random() - 0.5) * 120;
+                    const desvioY = (Math.random() - 0.5) * 60;
                     const rotacion = (Math.random() - 0.5) * 45;
                     
                     boton.style.setProperty('--desvioX', desvioX + 'px');
@@ -427,7 +404,6 @@
                 });
             }
 
-            // 2 toques: volver
             if (contadorVolver === 2 && efectoActivo) {
                 efectoActivo = false;
                 contadorToques = 0;
