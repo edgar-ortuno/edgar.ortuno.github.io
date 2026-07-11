@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edgar Ortuño</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Cargamos la fuente Shadows Into Light -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -12,16 +17,6 @@
             padding: 0;
             touch-action: manipulation;
         }
-
-        /* Cargamos la fuente Gorewild */
-        @font-face {
-            font-family: 'Gorewild';
-            src: url('https://cdn.jsdelivr.net/gh/BlackMetalFonts/fonts/Gorewild.woff2') format('woff2'),
-                 url('https://cdn.jsdelivr.net/gh/BlackMetalFonts/fonts/Gorewild.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             padding: 90px 20px 60px;
@@ -143,12 +138,13 @@
         }
 
         h1 {
-            font-family: 'Gorewild', sans-serif; /* Aplicamos la fuente al título */
-            font-size: 4rem; /* Un poco más grande para que se aprecie mejor el estilo */
+            font-family: 'Shadows Into Light', cursive; /* Fuente aplicada */
+            font-size: 3.5rem;
             font-weight: normal;
             margin-bottom: 12px;
             margin-top: 30px;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            white-space: nowrap; /* Fuerza que quede en una sola línea */
         }
         p {
             font-size: 1.2rem;
@@ -262,7 +258,7 @@
         <a href="#" onclick="mostrarAcercaDe(event)">Acerca De</a>
     </div>
 
-    <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar</a> Ortuño</h1>
+    <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar Ortuño</a></h1>
     <p>Bienvenid@ a mi página personal ✨</p>
 
     <div class="social-buttons" id="contenedor-redes">
