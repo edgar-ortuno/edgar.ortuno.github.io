@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,25 +14,21 @@
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             padding: 60px 20px;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: #000000;
             color: #e0e0e0;
             text-align: center;
             min-height: 100vh;
             position: relative;
             overflow: hidden;
+            transition: background 0.4s ease, color 0.4s ease;
         }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top, rgba(26,26,26,0.4) 0%, rgba(5,5,5,0.6) 100%);
-            z-index: -1;
-            pointer-events: none;
+        /* Modo claro */
+        body.modo-dia {
+            background: #ffffff;
+            color: #111111;
+        }
+        body.modo-dia p {
+            color: #444444;
         }
 
         /* Botón de menú con efecto vidrio líquido */
@@ -54,12 +49,41 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
+        body.modo-dia .boton-menu {
+            background: rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            color: #000;
+        }
         .boton-menu:hover {
-            background: rgba(255, 255, 255, 0.12);
             transform: scale(1.05);
         }
 
-        /* Menú lateral con efecto vidrio líquido */
+        /* Botón de cambio de tema */
+        .boton-tema {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        body.modo-dia .boton-tema {
+            background: #000000;
+            color: #ffffff;
+        }
+        .boton-tema:hover {
+            transform: scale(1.1);
+        }
+
+        /* Menú lateral con efecto vidrio y símbolo ℹ️ */
         .menu-lateral {
             position: fixed;
             left: -150px;
@@ -73,23 +97,28 @@
             padding-top: 70px;
             transition: left 0.3s ease;
             z-index: 999;
-            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+        }
+        body.modo-dia .menu-lateral {
+            background: rgba(0, 0, 0, 0.06);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
         }
         .menu-lateral.activo {
             left: 0;
         }
         .menu-lateral a {
             display: block;
-            color: #e0e0e0;
+            color: inherit;
             padding: 12px 18px;
             text-decoration: none;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
         .menu-lateral a:hover {
-            color: #ffffff;
             background: rgba(255, 255, 255, 0.08);
             padding-left: 22px;
+        }
+        body.modo-dia .menu-lateral a:hover {
+            background: rgba(0, 0, 0, 0.08);
         }
 
         h1 {
@@ -104,41 +133,45 @@
             color: #aaaaaa;
             max-width: 600px;
             margin: 0 auto 50px;
+            transition: color 0.4s ease;
         }
 
-        /* Contenedor de redes */
+        /* Contenedor de redes hacia la parte baja */
         .social-buttons {
-            margin-top: 40px;
+            position: absolute;
+            bottom: 8vh;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            position: relative;
-            min-height: 400px;
+            gap: 16px;
+            width: 100%;
+            max-width: 300px;
         }
 
-        /* Botones y animación de caída */
+        /* Botones con más curvas y colores vibrantes */
         .btn {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            width: 260px;
+            width: 100%;
             padding: 16px 32px;
-            border-radius: 50px;
+            border-radius: 28px; /* Más redondeado */
             text-decoration: none;
             font-size: 1.15rem;
-            font-weight: 400;
+            font-weight: 500;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.35);
             will-change: transform;
         }
         .btn:hover {
             transform: translateY(-5px);
         }
 
-        /* Animación de caída desordenada DENTRO de la pantalla */
+        /* Animación de caída desordenada */
         .btn.cayendo {
             position: absolute;
             animation: caerDesorden 1.5s ease forwards;
@@ -151,12 +184,13 @@
             }
         }
 
-        /* Colores de los botones */
-        .btn-facebook { background: #1877f2; color: white; }
-        .btn-instagram { background: linear-gradient(135deg, #f56040, #c13584, #833ab4); color: white; }
-        .btn-tiktok { background: #ffffff; color: #000000; border: 1px solid #000000; }
+        /* Colores MUCHO más vibrantes */
+        .btn-facebook { background: #1877F2; color: white; }
+        .btn-instagram { background: linear-gradient(135deg, #FF6C5C, #FF2E63, #A855F7); color: white; }
+        .btn-tiktok { background: #FFFFFF; color: #000000; border: 2px solid #000000; }
         .btn-x { background: #000000; color: #ffffff; border: 1px solid #333; }
-        .btn-whatsapp { background: #25d366; color: white; }
+        body.modo-dia .btn-x { background: #ffffff; color: #000000; border: 1px solid #ddd; }
+        .btn-whatsapp { background: #25D366; color: white; }
 
         .btn i {
             font-size: 1.6rem;
@@ -171,11 +205,11 @@
             color: #333;
             font-weight: 300;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.4s ease;
             z-index: 1;
         }
-        .marca:hover {
-            color: #555;
+        body.modo-dia .marca {
+            color: #aaa;
         }
     </style>
 </head>
@@ -185,9 +219,14 @@
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Menú lateral -->
+    <!-- Botón de cambio de tema sol/luna -->
+    <button class="boton-tema" onclick="cambiarTema()">
+        <i class="fas fa-moon" id="icono-tema"></i>
+    </button>
+
+    <!-- Menú lateral con símbolo ℹ️ -->
     <div class="menu-lateral" id="miMenu" onclick="event.stopPropagation()">
-        <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">Más Información. :)</a>
+        <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">ℹ️ Más Información. :)</a>
     </div>
 
     <h1>Edgar Ortuño</h1>
@@ -219,10 +258,18 @@
 
     <script>
         const menu = document.getElementById('miMenu');
+        const iconoTema = document.getElementById('icono-tema');
         let contadorToques = 0;
         let temporizador;
         let efectoActivo = false;
         const botones = document.querySelectorAll('.btn');
+
+        // Cambiar entre sol y luna + fondo negro/blanco
+        function cambiarTema() {
+            document.body.classList.toggle('modo-dia');
+            const esDia = document.body.classList.contains('modo-dia');
+            iconoTema.className = esDia ? 'fas fa-sun' : 'fas fa-moon';
+        }
 
         // Abrir/cerrar menú
         function alternarMenu(event) {
@@ -251,7 +298,6 @@
                 contadorToques = 0;
                 
                 botones.forEach((boton, indice) => {
-                    // Valores aleatorios para desordenar y voltear
                     const desvioX = (Math.random() - 0.5) * 180;
                     const desvioY = Math.random() * 80;
                     const rotacion = (Math.random() - 0.5) * 40;
@@ -267,20 +313,19 @@
             }
         });
 
-        // Movimiento con el giroscopio/acelerómetro del celular
+        // Movimiento con el giroscopio
         if (window.DeviceMotionEvent) {
             window.addEventListener('devicemotion', function(event) {
                 if (!efectoActivo) return;
                 
-                const giroX = event.beta || 0;  // Inclinación arriba/abajo
-                const giroY = event.gamma || 0; // Inclinación izquierda/derecha
+                const giroX = event.beta || 0;
+                const giroY = event.gamma || 0;
                 
                 botones.forEach((boton, indice) => {
                     const velocidad = 0.8 + (indice * 0.1);
                     const moverX = giroY * velocidad;
                     const moverY = giroX * velocidad;
                     
-                    const estiloActual = boton.style.transform || '';
                     const baseX = parseFloat(boton.style.getPropertyValue('--desvioX')) || 0;
                     const baseY = parseFloat(boton.style.getPropertyValue('--desvioY')) || 0;
                     const rotacion = boton.style.getPropertyValue('--rotacion') || '0deg';
