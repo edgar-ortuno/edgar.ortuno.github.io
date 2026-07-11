@@ -13,10 +13,11 @@
             touch-action: manipulation;
         }
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            font-weight: 300;
             padding: 70px 20px 60px;
             background: #000000;
-            color: #e0e0e0;
+            color: #ffffff;
             text-align: center;
             min-height: 100vh;
             position: relative;
@@ -25,21 +26,21 @@
         }
         body.modo-dia {
             background: #ffffff;
-            color: #111111;
+            color: #000000;
         }
         body.modo-dia p {
-            color: #444444;
+            color: #333333;
         }
 
         .boton-menu {
             position: fixed;
             top: 15px;
             left: 15px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
             font-size: 1.5rem;
             padding: 8px 12px;
             cursor: pointer;
@@ -51,7 +52,7 @@
         body.modo-dia .boton-menu {
             background: rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(0, 0, 0, 0.15);
-            color: #000;
+            color: #000000;
         }
         .boton-menu:hover {
             transform: scale(1.05);
@@ -87,7 +88,7 @@
             top: 0;
             height: 100vh;
             width: 150px;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -99,7 +100,7 @@
             transition: left 0.3s ease;
         }
         body.modo-dia .menu-lateral {
-            background: rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.9);
             border-right: 1px solid rgba(0, 0, 0, 0.1);
         }
         .menu-lateral.activo {
@@ -114,7 +115,7 @@
             transition: all 0.3s ease;
         }
         .menu-lateral a:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             padding-left: 22px;
         }
         body.modo-dia .menu-lateral a:hover {
@@ -142,7 +143,7 @@
         p {
             font-size: 1.2rem;
             font-weight: 300;
-            color: #aaaaaa;
+            color: #e0e0e0;
             max-width: 600px;
             margin: 0 auto 45px;
             transition: color 0.4s ease;
@@ -182,15 +183,18 @@
         }
 
         .btn i {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
             font-size: 1.6rem;
+            font-weight: 900;
+            font-style: normal;
         }
 
-        .btn-facebook { background: #1877F2; color: white; }
-        .btn-instagram { background: linear-gradient(135deg, #FF6C5C, #FF2E63, #A855F7); color: white; }
-        .btn-tiktok { background: #FFFFFF; color: #000000; border: 2px solid #000000; }
-        .btn-x { background: #000000; color: #ffffff; border: 1px solid #333; }
-        body.modo-dia .btn-x { background: #ffffff; color: #000000; border: 1px solid #ddd; }
-        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-facebook { background: #1877F2; color: #ffffff; }
+        .btn-instagram { background: linear-gradient(135deg, #FF6C5C, #FF2E63, #A855F7); color: #ffffff; }
+        .btn-tiktok { background: #ffffff; color: #000000; border: 2px solid #000000; }
+        .btn-x { background: #000000; color: #ffffff; border: 1px solid #333333; }
+        body.modo-dia .btn-x { background: #ffffff; color: #000000; border: 1px solid #dddddd; }
+        .btn-whatsapp { background: #25D366; color: #ffffff; }
 
         .elemento-lluvia {
             position: fixed;
@@ -214,14 +218,14 @@
             bottom: 12px;
             right: 20px;
             font-size: 0.85rem;
-            color: #333;
+            color: #cccccc;
             font-weight: 300;
             text-decoration: none;
             transition: color 0.4s ease;
             z-index: 1;
         }
         body.modo-dia .marca {
-            color: #aaa;
+            color: #555555;
         }
     </style>
 </head>
@@ -248,7 +252,7 @@
             <i class="fab fa-facebook-f"></i> Facebook
         </a>
         
-        <a href="https://www.instagram.com/edgar_ortuno" target="_blank" class="btn btn-instagram">
+        <a href="https://www.instagram.com/edgar_ortuno_?igsh=YzJ2anh0cWk0bXBs" target="_blank" class="btn btn-instagram">
             <i class="fab fa-instagram"></i> Instagram
         </a>
         
