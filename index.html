@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edgar Ortuño</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Cargamos la fuente para toda la página -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
@@ -17,7 +16,7 @@
             touch-action: manipulation;
         }
         body {
-            font-family: 'Shadows Into Light', cursive; /* Fuente en TODO el sitio */
+            font-family: 'Shadows Into Light', cursive;
             padding: 90px 20px 60px;
             background: #000000;
             color: #e0e0e0;
@@ -134,40 +133,38 @@
         }
 
         h1 {
-            font-size: 4.5rem; /* Agrandado con buena proporción */
+            font-size: 4.5rem;
             font-weight: normal;
-            margin-bottom: 15px; /* Distancia ajustada */
+            margin-bottom: 15px;
             margin-top: 30px;
             letter-spacing: 2px;
             white-space: nowrap;
-            /* Sombra SOLO en modo día */
             text-shadow: none;
         }
         body.modo-dia h1 {
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.35);
+            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
         }
 
         .subtitulo {
             font-size: 1.6rem;
             color: inherit;
             max-width: 600px;
-            margin: 0 auto 50px; /* Distancia ajustada hacia los botones */
-            /* Sombra SOLO en modo día */
+            margin: 0 auto 50px;
             text-shadow: none;
         }
         body.modo-dia .subtitulo {
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
         }
 
         .social-buttons {
             position: absolute;
-            top: calc(50% + 60px); /* Distancia ajustada de los botones */
+            top: calc(50% + 120px); /* Botones más abajo */
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 18px; /* Separación entre botones ajustada */
+            gap: 18px;
             width: 100%;
             max-width: 320px;
         }
@@ -192,16 +189,19 @@
             transform: translateY(-5px);
         }
 
+        /* Los iconos mantienen su fuente original */
+        .btn i {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
+            font-size: 1.8rem;
+            font-weight: 900;
+        }
+
         .btn-facebook { background: #1877F2; color: white; }
         .btn-instagram { background: linear-gradient(135deg, #FF6C5C, #FF2E63, #A855F7); color: white; }
         .btn-tiktok { background: #FFFFFF; color: #000000; border: 2px solid #000000; }
         .btn-x { background: #000000; color: #ffffff; border: 1px solid #333; }
         body.modo-dia .btn-x { background: #ffffff; color: #000000; border: 1px solid #ddd; }
         .btn-whatsapp { background: #25D366; color: white; }
-
-        .btn i {
-            font-size: 1.8rem;
-        }
 
         .elemento-lluvia {
             position: fixed;
@@ -211,6 +211,7 @@
             top: 15px;
         }
         .icono-lluvia {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
             font-size: 2rem;
         }
         .texto-2004 {
