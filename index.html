@@ -14,7 +14,7 @@
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 90px 20px 60px; /* Bajado el contenido */
+            padding: 70px 20px 60px; /* Subido el contenido */
             background: #000000;
             color: #e0e0e0;
             text-align: center;
@@ -134,9 +134,9 @@
 
         h1 {
             font-size: 3rem;
-            font-weight: 500; /* Un poco más grueso */
+            font-weight: 300;
             margin-bottom: 12px;
-            margin-top: 30px; /* Bajado el título */
+            margin-top: 10px; /* Subido el título */
             letter-spacing: 2px;
         }
         p {
@@ -144,13 +144,13 @@
             font-weight: 300;
             color: #aaaaaa;
             max-width: 600px;
-            margin: 0 auto 45px;
+            margin: 0 auto 45px; /* Menos espacio antes de botones */
             transition: color 0.4s ease;
         }
 
         .social-buttons {
             position: absolute;
-            top: calc(50% + 40px);
+            top: calc(50% + 40px); /* Botones subidos */
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -192,12 +192,13 @@
             font-size: 1.6rem;
         }
 
+        /* Estilos para elementos que llueven desde la altura del botón de tema */
         .elemento-lluvia {
             position: fixed;
             pointer-events: none;
             animation: lluvia 3s ease-in forwards;
             z-index: 500;
-            top: 15px;
+            top: 15px; /* Empiezan justo a la altura del botón sol/luna */
         }
         .icono-lluvia {
             font-size: 2rem;
@@ -213,6 +214,14 @@
         .corazon-cafe {
             font-size: 1.5rem;
             color: #8B4513;
+        }
+        .texto-edgar-lluvia {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+        body.modo-dia .texto-edgar-lluvia {
+            color: #111;
         }
 
         @keyframes lluvia {
@@ -251,7 +260,7 @@
         <a href="#" onclick="mostrarAcercaDe(event)">Acerca De</a>
     </div>
 
-    <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar</a> Ortuño</h1>
+    <h1><span class="enlace-edgar" onclick="lloverEdgar(event)">Edgar</span> Ortuño</h1>
     <p>Bienvenid@ a mi página personal ✨</p>
 
     <div class="social-buttons" id="contenedor-redes">
@@ -324,6 +333,15 @@
             event.stopPropagation();
             menu.classList.remove('activo');
             crearLluvia('corazon-cafe', '🤎', 30);
+        }
+
+        function lloverEdgar(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            crearLluvia('texto-edgar-lluvia', 'Edgar', 25);
+            setTimeout(() => {
+                window.open('https://youtu.be/FZU8I9bPaTo', '_blank');
+            }, 2000);
         }
 
         function contarToquesIcono(event, tipo) {
