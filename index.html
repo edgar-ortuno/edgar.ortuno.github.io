@@ -39,10 +39,10 @@
         /* Menú lateral más pequeño */
         .menu-lateral {
             position: fixed;
-            left: -150px; /* Oculto por defecto, ancho reducido */
+            left: -150px;
             top: 0;
             height: 100vh;
-            width: 150px; /* Menos ancho */
+            width: 150px;
             background: #000000;
             padding-top: 70px;
             transition: left 0.3s ease;
@@ -54,9 +54,9 @@
         .menu-lateral a {
             display: block;
             color: #e0e0e0;
-            padding: 12px 18px; /* Menos espacio interno */
+            padding: 12px 18px;
             text-decoration: none;
-            font-size: 1rem; /* Letra más chica */
+            font-size: 1rem;
             transition: color 0.3s;
         }
         .menu-lateral a:hover {
@@ -76,16 +76,23 @@
             max-width: 600px;
             margin: 0 auto 50px;
         }
+
+        /* Redes en fila hacia abajo */
         .social-buttons {
             margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
         .btn {
             position: relative;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
+            width: 260px;
             padding: 16px 32px;
-            margin: 10px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.15rem;
@@ -125,13 +132,13 @@
             font-size: 1.6rem;
         }
 
-        /* Texto "edgr" abajo a la derecha */
+        /* Texto "edgr." más chico y escondido */
         .marca {
             position: fixed;
-            bottom: 20px;
-            right: 30px;
-            font-size: 1.2rem;
-            color: #555;
+            bottom: 12px;
+            right: 20px;
+            font-size: 0.85rem;
+            color: #333;
             font-weight: 300;
         }
     </style>
@@ -148,7 +155,7 @@
     </div>
 
     <h1>Edgar Ortuño</h1>
-    <p>Bienvenido a mi página personal ✨</p>
+    <p>Bienvenid@ a mi página personal ✨</p>
 
     <div class="social-buttons">
         <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook">
@@ -172,8 +179,8 @@
         </a>
     </div>
 
-    <!-- Texto abajo a la derecha -->
-    <div class="marca">edgr</div>
+    <!-- Texto abajo más pequeño -->
+    <div class="marca">edgr.</div>
 
     <!-- Código para abrir y cerrar el menú -->
     <script>
