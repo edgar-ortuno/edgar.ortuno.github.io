@@ -13,37 +13,45 @@
             touch-action: manipulation;
         }
         body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            font-weight: 300;
-            padding: 90px 20px 40px;
-            background: linear-gradient(180deg, #d4a276 0%, #b8865c 100%);
-            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 90px 20px 60px; /* Bajado el contenido */
+            background: #000000;
+            color: #e0e0e0;
             text-align: center;
             min-height: 100vh;
             position: relative;
+            overflow: hidden;
             transition: background 0.4s ease, color 0.4s ease;
         }
         body.modo-dia {
-            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
-            color: #000000;
+            background: #ffffff;
+            color: #111111;
+        }
+        body.modo-dia p {
+            color: #444444;
         }
 
-        /* Botones de menú y tema (conservados igual) */
         .boton-menu {
             position: fixed;
             top: 15px;
             left: 15px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: inherit;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
             font-size: 1.5rem;
             padding: 8px 12px;
             cursor: pointer;
             z-index: 1000;
             border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
+        }
+        body.modo-dia .boton-menu {
+            background: rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            color: #000;
         }
         .boton-menu:hover {
             transform: scale(1.05);
@@ -53,9 +61,9 @@
             position: fixed;
             top: 15px;
             right: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            color: inherit;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: #ffffff;
+            color: #000000;
+            border: none;
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -63,6 +71,11 @@
             cursor: pointer;
             z-index: 1000;
             transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        body.modo-dia .boton-tema {
+            background: #000000;
+            color: #ffffff;
         }
         .boton-tema:hover {
             transform: scale(1.1);
@@ -74,7 +87,7 @@
             top: 0;
             height: 100vh;
             width: 150px;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -86,7 +99,7 @@
             transition: left 0.3s ease;
         }
         body.modo-dia .menu-lateral {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 0, 0, 0.06);
             border-right: 1px solid rgba(0, 0, 0, 0.1);
         }
         .menu-lateral.activo {
@@ -97,143 +110,129 @@
             color: inherit;
             padding: 12px 18px;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
         .menu-lateral a:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             padding-left: 22px;
         }
+        body.modo-dia .menu-lateral a:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
 
-        /* Título principal */
+        .enlace-edgar {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        .enlace-edgar:hover {
+            color: #8B4513;
+            text-decoration: underline;
+        }
+
         h1 {
-            font-size: 3.2rem;
-            font-weight: 300;
-            margin-bottom: 5px;
-            margin-top: 10px;
-            letter-spacing: 1px;
-            white-space: nowrap;
+            font-size: 3rem;
+            font-weight: 500; /* Un poco más grueso */
+            margin-bottom: 12px;
+            margin-top: 30px; /* Bajado el título */
+            letter-spacing: 2px;
         }
-        .subtitulo {
-            font-size: 1.4rem;
-            margin-bottom: 30px;
-            opacity: 0.85;
+        p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #aaaaaa;
+            max-width: 600px;
+            margin: 0 auto 45px;
+            transition: color 0.4s ease;
         }
 
-        /* Contenedor de selección de música IGUAL a la imagen */
-        .contenedor-musica {
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        .portada-cancion {
-            width: 100%;
-            max-width: 380px;
-            margin: 0 auto 25px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            position: relative;
-        }
-        .portada-cancion img {
-            width: 100%;
-            display: block;
-        }
-        .boton-play {
+        .social-buttons {
             position: absolute;
-            top: 50%;
+            top: calc(50% + 40px);
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255,255,255,0.9);
-            color: #000;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .btn {
+            position: relative;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-        }
-
-        .nombre-cancion {
-            font-size: 2rem;
-            font-weight: 400;
-            margin-bottom: 8px;
-        }
-        .texto-seleccion {
-            font-size: 1.3rem;
-            opacity: 0.8;
-            margin-bottom: 30px;
-        }
-
-        .lista-plataformas {
-            background: #ffffff;
-            color: #000000;
-            border-radius: 16px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: left;
-        }
-        body.modo-dia .lista-plataformas {
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .item-plataforma {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 10px;
-            border-bottom: 1px solid #e0e0e0;
+            gap: 12px;
+            width: 100%;
+            padding: 16px 32px;
+            border-radius: 28px;
             text-decoration: none;
-            color: inherit;
-            transition: background 0.2s ease;
+            font-size: 1.15rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+            user-select: none;
         }
-        .item-plataforma:last-child {
-            border-bottom: none;
-        }
-        .item-plataforma:hover {
-            background: #f8f8f8;
+        .btn:hover {
+            transform: translateY(-5px);
         }
 
-        .plataforma-info {
-            display: flex;
-            align-items: center;
-            gap: 14px;
+        .btn-facebook { background: #1877F2; color: white; }
+        .btn-instagram { background: linear-gradient(135deg, #FF6C5C, #FF2E63, #A855F7); color: white; }
+        .btn-tiktok { background: #FFFFFF; color: #000000; border: 2px solid #000000; }
+        .btn-x { background: #000000; color: #ffffff; border: 1px solid #333; }
+        body.modo-dia .btn-x { background: #ffffff; color: #000000; border: 1px solid #ddd; }
+        .btn-whatsapp { background: #25D366; color: white; }
+
+        .btn i {
             font-size: 1.6rem;
-            font-weight: 500;
-        }
-        .plataforma-info img {
-            height: 32px;
-            width: auto;
-            object-fit: contain;
         }
 
-        .boton-jugar {
-            background: #e9ecef;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #000;
+        .elemento-lluvia {
+            position: fixed;
+            pointer-events: none;
+            animation: lluvia 3s ease-in forwards;
+            z-index: 500;
+            top: 15px;
+        }
+        .icono-lluvia {
+            font-size: 2rem;
+        }
+        .texto-2004 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e0e0e0;
+        }
+        body.modo-dia .texto-2004 {
+            color: #111;
+        }
+        .corazon-cafe {
+            font-size: 1.5rem;
+            color: #8B4513;
         }
 
-        .texto-inferior {
-            margin-top: 25px;
-            font-size: 1rem;
-            line-height: 1.5;
-            opacity: 0.9;
-        }
-        .texto-inferior a {
-            color: inherit;
-            text-decoration: underline;
-            font-weight: 400;
+        @keyframes lluvia {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Iconos conservados con su estilo original */
-        i {
-            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
-            font-weight: 900;
-            font-style: normal;
+        .marca {
+            position: fixed;
+            bottom: 12px;
+            right: 20px;
+            font-size: 0.85rem;
+            color: #333;
+            font-weight: 300;
+            text-decoration: none;
+            transition: color 0.4s ease;
+            z-index: 1;
+        }
+        body.modo-dia .marca {
+            color: #aaa;
         }
     </style>
 </head>
@@ -252,78 +251,49 @@
         <a href="#" onclick="mostrarAcercaDe(event)">Acerca De</a>
     </div>
 
-    <h1>Edgar Ortuño</h1>
-    <p class="subtitulo">Bienvenid@ a : Página..</p>
+    <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar</a> Ortuño</h1>
+    <p>Bienvenid@ a mi página personal ✨</p>
 
-    <div class="contenedor-musica">
-        <div class="portada-cancion">
-            <img src="https://i.imgur.com/8ZkXqLh.jpg" alt="Nicky Jam - Bohemia">
-            <div class="boton-play"><i class="fas fa-play"></i></div>
-        </div>
+    <div class="social-buttons" id="contenedor-redes">
+        <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook" onclick="contarToquesIcono(event, 'facebook')">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+        
+        <a href="https://www.instagram.com/edgar_ortuno" target="_blank" class="btn btn-instagram" onclick="contarToquesIcono(event, 'instagram')">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        
+        <a href="https://www.tiktok.com/@edgar_ortuno" target="_blank" class="btn btn-tiktok" onclick="contarToquesIcono(event, 'tiktok')">
+            <i class="fab fa-tiktok"></i> TikTok
+        </a>
 
-        <div class="nombre-cancion">Nicky Jam - Bohemia</div>
-        <div class="texto-seleccion">Elige plataforma musical</div>
-
-        <div class="lista-plataformas">
-            <a href="https://open.spotify.com/track/..." target="_blank" class="item-plataforma">
-                <div class="plataforma-info">
-                    <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify">
-                    Spotify
-                </div>
-                <div class="boton-jugar">Jugar</div>
-            </a>
-
-            <a href="https://music.amazon.com/..." target="_blank" class="item-plataforma">
-                <div class="plataforma-info">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968835.png" alt="Amazon Music">
-                    Amazon Music
-                </div>
-                <div class="boton-jugar">Jugar</div>
-            </a>
-
-            <a href="https://www.deezer.com/..." target="_blank" class="item-plataforma">
-                <div class="plataforma-info">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1383/1383265.png" alt="Deezer">
-                    DEEZER
-                </div>
-                <div class="boton-jugar">Jugar</div>
-            </a>
-
-            <a href="https://tidal.com/..." target="_blank" class="item-plataforma">
-                <div class="plataforma-info">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5011/5011209.png" alt="TIDAL">
-                    TIDAL
-                </div>
-                <div class="boton-jugar">Jugar</div>
-            </a>
-
-            <a href="https://audiomack.com/..." target="_blank" class="item-plataforma">
-                <div class="plataforma-info">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968998.png" alt="Audiomack">
-                    audiomack
-                </div>
-                <div class="boton-jugar">Jugar</div>
-            </a>
-
-            <a href="https://music.youtube.com/..." target="_blank" class="item-plataforma">
-                <div class="plataforma-info">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube Music">
-                    YouTube Music
-                </div>
-                <div class="boton-jugar">Jugar</div>
-            </a>
-        </div>
-
-        <div class="texto-inferior">
-            Usted ha aceptado el uso de cookies para este servicio.<br>
-            <a href="#">haga clic aquí</a> para administrar tus permisos.<br><br>
-            Esta página puede contener enlaces de afiliados.
-        </div>
+        <a href="https://x.com/edgar_ortuno_" target="_blank" class="btn btn-x" onclick="contarToquesIcono(event, 'x')">
+            <i class="fa-brands fa-x-twitter"></i> X
+        </a>
+        
+        <a href="https://wa.me/59171274987" target="_blank" class="btn btn-whatsapp" onclick="contarToquesIcono(event, 'whatsapp')">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
     </div>
+
+    <a href="https://youtu.be/XjA7tvuqXG4?si=sW4pXYvZqhJa7T8Z" target="_blank" class="marca">edgr.</a>
 
     <script>
         const menu = document.getElementById('miMenu');
         const iconoTema = document.getElementById('icono-tema');
+        let contadorToquesIcono = 0;
+        let ultimoIcono = null;
+        let contadorToquesVacio = 0;
+        let temporizadorIcono;
+        let temporizadorVacio;
+
+        const iconos = {
+            facebook: '<i class="fab fa-facebook-f"></i>',
+            instagram: '<i class="fab fa-instagram"></i>',
+            tiktok: '<i class="fab fa-tiktok"></i>',
+            x: '<i class="fa-brands fa-x-twitter"></i>',
+            whatsapp: '<i class="fab fa-whatsapp"></i>'
+        };
 
         function cambiarTema() {
             document.body.classList.toggle('modo-dia');
@@ -340,7 +310,7 @@
             if (menu.classList.contains('activo')) {
                 menu.classList.remove('activo');
             }
-        }
+        });
 
         function mostrarAcercaDe(event) {
             event.preventDefault();
@@ -353,20 +323,59 @@
             event.preventDefault();
             event.stopPropagation();
             menu.classList.remove('activo');
-            // Se mantiene la función de lluvia igual
-            for (let i = 0; i < 30; i++) {
+            crearLluvia('corazon-cafe', '🤎', 30);
+        }
+
+        function contarToquesIcono(event, tipo) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if (ultimoIcono !== tipo) {
+                contadorToquesIcono = 0;
+                ultimoIcono = tipo;
+            }
+            
+            contadorToquesIcono++;
+            clearTimeout(temporizadorIcono);
+            
+            temporizadorIcono = setTimeout(() => {
+                contadorToquesIcono = 0;
+                ultimoIcono = null;
+            }, 1000);
+
+            if (contadorToquesIcono === 3) {
+                contadorToquesIcono = 0;
+                ultimoIcono = null;
+                crearLluvia('icono-lluvia', iconos[tipo], 35);
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral') || e.target.closest('.enlace-edgar')) return;
+            
+            contadorToquesVacio++;
+            clearTimeout(temporizadorVacio);
+            
+            temporizadorVacio = setTimeout(() => {
+                contadorToquesVacio = 0;
+            }, 1000);
+
+            if (contadorToquesVacio === 2) {
+                contadorToquesVacio = 0;
+                crearLluvia('texto-2004', '2004', 30);
+            }
+        });
+
+        function crearLluvia(clase, contenido, cantidad) {
+            for (let i = 0; i < cantidad; i++) {
                 setTimeout(() => {
                     const elemento = document.createElement('div');
-                    elemento.style.position = 'fixed';
-                    elemento.style.pointerEvents = 'none';
-                    elemento.style.animation = 'lluvia 3s ease-in forwards';
-                    elemento.style.zIndex = '500';
+                    elemento.className = `elemento-lluvia ${clase}`;
+                    elemento.innerHTML = contenido;
                     elemento.style.left = Math.random() * 100 + 'vw';
-                    elemento.style.top = '15px';
-                    elemento.style.fontSize = '1.5rem';
-                    elemento.style.color = '#8B4513';
-                    elemento.innerHTML = '🤎';
+                    elemento.style.animationDuration = (1.5 + Math.random() * 2) + 's';
                     document.body.appendChild(elemento);
+                    
                     setTimeout(() => elemento.remove(), 5000);
                 }, i * 50);
             }
