@@ -14,7 +14,6 @@
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            font-weight: 300;
             padding: 0;
             background: #000000;
             color: #ffffff;
@@ -114,39 +113,31 @@
             padding-left: 22px;
         }
 
-        .enlace-edgar {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-        .enlace-edgar:hover {
-            color: #8B4513;
-            text-decoration: underline;
-        }
-
-        /* Texto de bienvenida: arriba de todo y letra pequeña */
+        /* Texto de bienvenida: más delgado y más pequeño */
         .bienvenida {
             position: fixed;
             top: 8px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.85rem;
-            opacity: 0.7;
+            font-size: 0.7rem;
+            font-weight: 100; /* Más delgado */
+            opacity: 0.6;
             z-index: 50;
         }
 
+        /* Título: más grande y más grueso */
         h1 {
-            font-size: 3rem;
-            font-weight: 300;
+            font-size: 3.8rem; /* Más grande */
+            font-weight: 700; /* Más grueso */
             margin: 50px 0 20px;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            padding: 0 15px;
         }
 
-        /* Botones fijos en el centro absoluto, sin moverse */
+        /* Botones más abajo del centro */
         .social-buttons {
             position: fixed;
-            top: 50%;
+            top: calc(50% + 120px); /* Bajados más */
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -250,7 +241,7 @@
         <a href="#" onclick="mostrarAcercaDe(event)">Acerca De</a>
     </div>
 
-    <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar Ortuño</a></h1>
+    <h1>ESTAMOS CONFIGURANDO...</h1>
 
     <div class="social-buttons" id="contenedor-redes">
         <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook">
@@ -314,7 +305,7 @@
         }
 
         document.addEventListener('click', function(e) {
-            if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral') || e.target.closest('.enlace-edgar') || e.target.closest('.bienvenida')) return;
+            if (e.target.closest('.btn') || e.target.closest('.boton-menu') || e.target.closest('.boton-tema') || e.target.closest('.menu-lateral') || e.target.closest('.bienvenida')) return;
             
             contadorToquesVacio++;
             clearTimeout(temporizadorVacio);
