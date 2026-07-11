@@ -84,9 +84,10 @@
 
         .boton-archivos {
             position: fixed;
-            bottom: 15px;
+            /* ✅ Bajado un poco: antes 15px, ahora 22px */
+            bottom: 22px;
             left: 15px;
-            /* 🌙 Modo Noche: Negro con letras blancas */
+            /* 🌙 MODO NOCHE: Fondo negro, texto blanco */
             background: #000000;
             color: #ffffff;
             border: 1px solid rgba(255,255,255,0.3);
@@ -98,7 +99,7 @@
             z-index: 1000;
             transition: all 0.4s ease;
         }
-        /* ☀️ Modo Día: Se vuelve blanco con letras negras */
+        /* ☀️ MODO DÍA: Fondo blanco, texto negro */
         body.modo-dia .boton-archivos {
             background: #ffffff;
             color: #000000;
