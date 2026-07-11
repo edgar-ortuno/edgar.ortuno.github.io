@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edgar Ortuño</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Cargamos la fuente Shadows Into Light -->
+    <!-- Cargamos la fuente para toda la página -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
@@ -18,7 +17,7 @@
             touch-action: manipulation;
         }
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Shadows Into Light', cursive; /* Fuente en TODO el sitio */
             padding: 90px 20px 60px;
             background: #000000;
             color: #e0e0e0;
@@ -31,9 +30,6 @@
         body.modo-dia {
             background: #ffffff;
             color: #111111;
-        }
-        body.modo-dia p {
-            color: #444444;
         }
 
         .boton-menu {
@@ -115,7 +111,7 @@
             color: inherit;
             padding: 12px 18px;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
         .menu-lateral a:hover {
@@ -138,34 +134,42 @@
         }
 
         h1 {
-            font-family: 'Shadows Into Light', cursive; /* Fuente aplicada */
-            font-size: 3.5rem;
+            font-size: 4.5rem; /* Agrandado con buena proporción */
             font-weight: normal;
-            margin-bottom: 12px;
+            margin-bottom: 15px; /* Distancia ajustada */
             margin-top: 30px;
             letter-spacing: 2px;
-            white-space: nowrap; /* Fuerza que quede en una sola línea */
+            white-space: nowrap;
+            /* Sombra SOLO en modo día */
+            text-shadow: none;
         }
-        p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: #aaaaaa;
+        body.modo-dia h1 {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.35);
+        }
+
+        .subtitulo {
+            font-size: 1.6rem;
+            color: inherit;
             max-width: 600px;
-            margin: 0 auto 45px;
-            transition: color 0.4s ease;
+            margin: 0 auto 50px; /* Distancia ajustada hacia los botones */
+            /* Sombra SOLO en modo día */
+            text-shadow: none;
+        }
+        body.modo-dia .subtitulo {
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
         }
 
         .social-buttons {
             position: absolute;
-            top: calc(50% + 40px);
+            top: calc(50% + 60px); /* Distancia ajustada de los botones */
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: 18px; /* Separación entre botones ajustada */
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
         }
 
         .btn {
@@ -178,8 +182,8 @@
             padding: 16px 32px;
             border-radius: 28px;
             text-decoration: none;
-            font-size: 1.15rem;
-            font-weight: 500;
+            font-size: 1.4rem;
+            font-weight: normal;
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(0,0,0,0.35);
             user-select: none;
@@ -196,7 +200,7 @@
         .btn-whatsapp { background: #25D366; color: white; }
 
         .btn i {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
         }
 
         .elemento-lluvia {
@@ -211,7 +215,7 @@
         }
         .texto-2004 {
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: normal;
             color: #e0e0e0;
         }
         body.modo-dia .texto-2004 {
@@ -231,15 +235,15 @@
             position: fixed;
             bottom: 12px;
             right: 20px;
-            font-size: 0.85rem;
-            color: #333;
-            font-weight: 300;
+            font-size: 1.1rem;
+            color: #777;
+            font-weight: normal;
             text-decoration: none;
             transition: color 0.4s ease;
             z-index: 1;
         }
         body.modo-dia .marca {
-            color: #aaa;
+            color: #555;
         }
     </style>
 </head>
@@ -259,7 +263,7 @@
     </div>
 
     <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar Ortuño</a></h1>
-    <p>Bienvenid@ a mi página personal ✨</p>
+    <p class="subtitulo">Bienvenid@ a : Página..</p>
 
     <div class="social-buttons" id="contenedor-redes">
         <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook" onclick="contarToquesIcono(event, 'facebook')">
