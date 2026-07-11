@@ -33,34 +33,44 @@
             pointer-events: none;
         }
 
-        /* Botón de menú con 3 barras */
+        /* Botón de menú con efecto vidrio líquido */
         .boton-menu {
             position: fixed;
             top: 15px;
             left: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: #fff;
-            border: none;
             font-size: 1.5rem;
             padding: 8px 12px;
             cursor: pointer;
             z-index: 1000;
-            border-radius: 6px;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .boton-menu:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.05);
         }
 
-        /* Menú lateral */
+        /* Menú lateral con efecto vidrio líquido */
         .menu-lateral {
             position: fixed;
             left: -150px;
             top: 0;
             height: 100vh;
             width: 150px;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 70px;
             transition: left 0.3s ease;
             z-index: 999;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
         }
         .menu-lateral.activo {
             left: 0;
@@ -71,10 +81,12 @@
             padding: 12px 18px;
             text-decoration: none;
             font-size: 1rem;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
         }
         .menu-lateral a:hover {
-            color: #3498db;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            padding-left: 22px;
         }
 
         h1 {
@@ -163,14 +175,14 @@
     </style>
 </head>
 <body>
-    <!-- Botón de menú con 3 barras -->
+    <!-- Botón de menú con 3 barras y efecto vidrio -->
     <button class="boton-menu" onclick="alternarMenu(event)">
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Menú lateral con el texto actualizado -->
+    <!-- Menú lateral con vidrio y texto actualizado -->
     <div class="menu-lateral" id="miMenu" onclick="event.stopPropagation()">
-        <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">MÁS INFORMACIÓN :)</a>
+        <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">Más Información. :)</a>
     </div>
 
     <h1>Edgar Ortuño</h1>
