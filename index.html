@@ -19,7 +19,7 @@
             font-family: 'Shadows Into Light', cursive;
             padding: 90px 20px 60px;
             background: #000000;
-            color: #e0e0e0;
+            color: #ffffff; /* Letras más blancas */
             text-align: center;
             min-height: 100vh;
             position: relative;
@@ -28,7 +28,7 @@
         }
         body.modo-dia {
             background: #ffffff;
-            color: #111111;
+            color: #000000;
         }
 
         .boton-menu {
@@ -135,30 +135,24 @@
         h1 {
             font-size: 4.5rem;
             font-weight: normal;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             margin-top: 30px;
             letter-spacing: 2px;
             white-space: nowrap;
-            text-shadow: none;
-        }
-        body.modo-dia h1 {
-            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+            text-shadow: none; /* Sin sombras */
         }
 
         .subtitulo {
             font-size: 1.6rem;
             color: inherit;
             max-width: 600px;
-            margin: 0 auto 50px;
-            text-shadow: none;
-        }
-        body.modo-dia .subtitulo {
-            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+            margin: 0 auto 35px; /* Más arriba */
+            text-shadow: none; /* Sin sombras */
         }
 
         .social-buttons {
             position: absolute;
-            top: calc(50% + 120px); /* Botones más abajo */
+            top: calc(50% + 120px);
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -189,11 +183,12 @@
             transform: translateY(-5px);
         }
 
-        /* Los iconos mantienen su fuente original */
+        /* Iconos con su fuente original normal */
         .btn i {
             font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
             font-size: 1.8rem;
             font-weight: 900;
+            font-style: normal;
         }
 
         .btn-facebook { background: #1877F2; color: white; }
@@ -217,7 +212,7 @@
         .texto-2004 {
             font-size: 2rem;
             font-weight: normal;
-            color: #e0e0e0;
+            color: #ffffff;
         }
         body.modo-dia .texto-2004 {
             color: #111;
@@ -237,7 +232,7 @@
             bottom: 12px;
             right: 20px;
             font-size: 1.1rem;
-            color: #777;
+            color: #cccccc;
             font-weight: normal;
             text-decoration: none;
             transition: color 0.4s ease;
