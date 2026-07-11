@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,9 +12,19 @@
             padding: 0;
             touch-action: manipulation;
         }
+
+        /* Cargamos la fuente Gorewild */
+        @font-face {
+            font-family: 'Gorewild';
+            src: url('https://cdn.jsdelivr.net/gh/BlackMetalFonts/fonts/Gorewild.woff2') format('woff2'),
+                 url('https://cdn.jsdelivr.net/gh/BlackMetalFonts/fonts/Gorewild.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 90px 20px 60px; /* Bajado el contenido */
+            padding: 90px 20px 60px;
             background: #000000;
             color: #e0e0e0;
             text-align: center;
@@ -134,11 +143,12 @@
         }
 
         h1 {
-            font-size: 3rem;
-            font-weight: 500; /* Un poco más grueso */
+            font-family: 'Gorewild', sans-serif; /* Aplicamos la fuente al título */
+            font-size: 4rem; /* Un poco más grande para que se aprecie mejor el estilo */
+            font-weight: normal;
             margin-bottom: 12px;
-            margin-top: 30px; /* Bajado el título */
-            letter-spacing: 2px;
+            margin-top: 30px;
+            letter-spacing: 3px;
         }
         p {
             font-size: 1.2rem;
