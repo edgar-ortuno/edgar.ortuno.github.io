@@ -14,7 +14,7 @@
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 100px 20px 60px;
+            padding: 70px 20px 60px; /* Subido el contenido */
             background: #000000;
             color: #e0e0e0;
             text-align: center;
@@ -136,7 +136,7 @@
             font-size: 3rem;
             font-weight: 300;
             margin-bottom: 12px;
-            margin-top: 40px;
+            margin-top: 10px; /* Subido el título */
             letter-spacing: 2px;
         }
         p {
@@ -144,13 +144,13 @@
             font-weight: 300;
             color: #aaaaaa;
             max-width: 600px;
-            margin: 0 auto 55px;
+            margin: 0 auto 45px; /* Menos espacio antes de botones */
             transition: color 0.4s ease;
         }
 
         .social-buttons {
             position: absolute;
-            top: calc(50% + 80px);
+            top: calc(50% + 40px); /* Botones subidos */
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -192,12 +192,13 @@
             font-size: 1.6rem;
         }
 
-        /* Estilos para elementos que llueven */
+        /* Estilos para elementos que llueven desde la altura del botón de tema */
         .elemento-lluvia {
             position: fixed;
             pointer-events: none;
             animation: lluvia 3s ease-in forwards;
             z-index: 500;
+            top: 15px; /* Empiezan justo a la altura del botón sol/luna */
         }
         .icono-lluvia {
             font-size: 2rem;
@@ -224,7 +225,7 @@
         }
 
         @keyframes lluvia {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
@@ -256,6 +257,7 @@
     <div class="menu-lateral" id="miMenu" onclick="event.stopPropagation()">
         <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">Más Información. :)</a>
         <a href="#" onclick="lloverCorazones(event)">Ortuño :(</a>
+        <a href="#" onclick="mostrarAcercaDe(event)">Acerca De</a>
     </div>
 
     <h1><span class="enlace-edgar" onclick="lloverEdgar(event)">Edgar</span> Ortuño</h1>
@@ -318,6 +320,13 @@
                 menu.classList.remove('activo');
             }
         });
+
+        function mostrarAcercaDe(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            menu.classList.remove('activo');
+            alert('Xd');
+        }
 
         function lloverCorazones(event) {
             event.preventDefault();
