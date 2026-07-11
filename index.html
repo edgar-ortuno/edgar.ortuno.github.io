@@ -24,39 +24,39 @@
         /* Botón de menú con 3 barras */
         .boton-menu {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             background: #000;
             color: #fff;
             border: none;
-            font-size: 1.8rem;
-            padding: 10px 15px;
+            font-size: 1.5rem;
+            padding: 8px 12px;
             cursor: pointer;
             z-index: 1000;
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
-        /* Menú lateral */
+        /* Menú lateral más pequeño */
         .menu-lateral {
             position: fixed;
-            left: -200px; /* Oculto por defecto */
+            left: -150px; /* Oculto por defecto, ancho reducido */
             top: 0;
             height: 100vh;
-            width: 200px;
-            background: #000000; /* Fondo totalmente negro */
-            padding-top: 80px;
+            width: 150px; /* Menos ancho */
+            background: #000000;
+            padding-top: 70px;
             transition: left 0.3s ease;
             z-index: 999;
         }
         .menu-lateral.activo {
-            left: 0; /* Se muestra al activarse */
+            left: 0;
         }
         .menu-lateral a {
             display: block;
             color: #e0e0e0;
-            padding: 18px 25px;
+            padding: 12px 18px; /* Menos espacio interno */
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Letra más chica */
             transition: color 0.3s;
         }
         .menu-lateral a:hover {
@@ -64,13 +64,13 @@
         }
 
         h1 {
-            font-size: 3.2rem;
+            font-size: 3rem;
             font-weight: 300;
             margin-bottom: 15px;
             letter-spacing: 2px;
         }
         p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 300;
             color: #aaaaaa;
             max-width: 600px;
@@ -118,6 +118,7 @@
         .btn-facebook { background: #1877f2; color: white; }
         .btn-instagram { background: linear-gradient(135deg, #f56040, #c13584, #833ab4); color: white; }
         .btn-tiktok { background: #ffffff; color: #000000; border: 1px solid #000000; }
+        .btn-x { background: #000000; color: #ffffff; border: 1px solid #333; }
         .btn-whatsapp { background: #25d366; color: white; }
 
         .btn i {
@@ -141,9 +142,9 @@
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Menú lateral -->
+    <!-- Menú lateral con enlace al video -->
     <div class="menu-lateral" id="miMenu">
-        <a href="#">Más información</a>
+        <a href="https://youtu.be/CIOq0qkZjcU?si=TS7SsueL4xG5JSD7" target="_blank">Más información</a>
     </div>
 
     <h1>Edgar Ortuño</h1>
@@ -160,6 +161,10 @@
         
         <a href="https://www.tiktok.com/@edgar_ortuno" target="_blank" class="btn btn-tiktok">
             <i class="fab fa-tiktok"></i> TikTok
+        </a>
+
+        <a href="https://x.com/edgar_ortuno_" target="_blank" class="btn btn-x">
+            <i class="fa-brands fa-x-twitter"></i> X
         </a>
         
         <a href="https://wa.me/59171274987" target="_blank" class="btn btn-whatsapp">
