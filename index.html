@@ -13,34 +13,53 @@
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 60px 20px 60px 140px;
+            padding: 60px 20px;
             background: #0a0a0a;
             color: #e0e0e0;
             text-align: center;
             min-height: 100vh;
+            position: relative;
         }
 
-        /* Menú lateral izquierdo */
+        /* Botón de menú con 3 barras */
+        .boton-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #000;
+            color: #fff;
+            border: none;
+            font-size: 1.8rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1000;
+            border-radius: 8px;
+        }
+
+        /* Menú lateral */
         .menu-lateral {
             position: fixed;
-            left: 0;
+            left: -200px; /* Oculto por defecto */
             top: 0;
             height: 100vh;
-            background: #111;
-            padding-top: 40px;
-            width: 120px;
-            border-right: 1px solid #222;
+            width: 200px;
+            background: #000000; /* Fondo totalmente negro */
+            padding-top: 80px;
+            transition: left 0.3s ease;
+            z-index: 999;
+        }
+        .menu-lateral.activo {
+            left: 0; /* Se muestra al activarse */
         }
         .menu-lateral a {
             display: block;
             color: #e0e0e0;
-            padding: 15px 10px;
+            padding: 18px 25px;
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: background 0.3s;
+            font-size: 1.1rem;
+            transition: color 0.3s;
         }
         .menu-lateral a:hover {
-            background: #222;
             color: #3498db;
         }
 
@@ -104,11 +123,26 @@
         .btn i {
             font-size: 1.6rem;
         }
+
+        /* Texto "edgr" abajo a la derecha */
+        .marca {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: 300;
+        }
     </style>
 </head>
 <body>
+    <!-- Botón de menú con 3 barras -->
+    <button class="boton-menu" onclick="alternarMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <!-- Menú lateral -->
-    <div class="menu-lateral">
+    <div class="menu-lateral" id="miMenu">
         <a href="#">Más información</a>
     </div>
 
@@ -132,5 +166,16 @@
             <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
     </div>
+
+    <!-- Texto abajo a la derecha -->
+    <div class="marca">edgr</div>
+
+    <!-- Código para abrir y cerrar el menú -->
+    <script>
+        function alternarMenu() {
+            const menu = document.getElementById('miMenu');
+            menu.classList.toggle('activo');
+        }
+    </script>
 </body>
 </html>
