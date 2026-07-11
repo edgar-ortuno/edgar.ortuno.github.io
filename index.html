@@ -14,7 +14,7 @@
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 60px 20px;
+            padding: 80px 20px 60px; /* Ajuste: más espacio arriba para bajar contenido */
             background: #000000;
             color: #e0e0e0;
             text-align: center;
@@ -139,7 +139,8 @@
         h1 {
             font-size: 3rem;
             font-weight: 300;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            margin-top: 20px; /* Baja un poco el título */
             letter-spacing: 2px;
         }
         p {
@@ -147,14 +148,14 @@
             font-weight: 300;
             color: #aaaaaa;
             max-width: 600px;
-            margin: 0 auto 50px;
+            margin: 0 auto 45px; /* Menos espacio antes de los botones */
             transition: color 0.4s ease;
         }
 
-        /* Contenedor de redes CENTRADO */
+        /* Contenedor de redes: bajado ligeramente */
         .social-buttons {
             position: absolute;
-            top: 50%;
+            top: calc(50% + 40px); /* Bajado un poco más del centro */
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -191,7 +192,7 @@
             transform: translateY(-5px);
         }
 
-        /* Animación de caída desordenada */
+        /* Animación de caída: ahora bajan más */
         .btn.cayendo {
             position: absolute;
             animation: caerDesorden 1.2s ease forwards;
@@ -199,7 +200,7 @@
         @keyframes caerDesorden {
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
             100% { 
-                transform: translateY(var(--desvioY, 0px)) translateX(var(--desvioX, 0px)) rotate(var(--rotacion, 0deg)); 
+                transform: translateY(calc(var(--desvioY, 0px) + 60px)) translateX(var(--desvioX, 0px)) rotate(var(--rotacion, 0deg)); 
                 opacity: 0.95; 
             }
         }
@@ -412,7 +413,7 @@
                 
                 botones.forEach((boton, indice) => {
                     const desvioX = (Math.random() - 0.5) * 220;
-                    const desvioY = (Math.random() - 0.5) * 160;
+                    const desvioY = (Math.random() - 0.5) * 120;
                     const rotacion = (Math.random() - 0.5) * 45;
                     
                     boton.style.setProperty('--desvioX', desvioX + 'px');
