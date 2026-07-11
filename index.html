@@ -14,9 +14,10 @@
         }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            padding: 70px 20px 60px; /* Subido el contenido */
+            font-weight: 300;
+            padding: 70px 20px 60px;
             background: #000000;
-            color: #e0e0e0;
+            color: #ffffff;
             text-align: center;
             min-height: 100vh;
             position: relative;
@@ -25,10 +26,7 @@
         }
         body.modo-dia {
             background: #ffffff;
-            color: #111111;
-        }
-        body.modo-dia p {
-            color: #444444;
+            color: #000000;
         }
 
         .boton-menu {
@@ -45,7 +43,6 @@
             cursor: pointer;
             z-index: 1000;
             border-radius: 10px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
         body.modo-dia .boton-menu {
@@ -71,7 +68,6 @@
             cursor: pointer;
             z-index: 1000;
             transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         body.modo-dia .boton-tema {
             background: #000000;
@@ -117,9 +113,6 @@
             background: rgba(255, 255, 255, 0.08);
             padding-left: 22px;
         }
-        body.modo-dia .menu-lateral a:hover {
-            background: rgba(0, 0, 0, 0.08);
-        }
 
         .enlace-edgar {
             color: inherit;
@@ -136,21 +129,21 @@
             font-size: 3rem;
             font-weight: 300;
             margin-bottom: 12px;
-            margin-top: 10px; /* Subido el título */
+            margin-top: 10px;
             letter-spacing: 2px;
+            white-space: nowrap;
         }
         p {
             font-size: 1.2rem;
             font-weight: 300;
-            color: #aaaaaa;
+            color: inherit;
             max-width: 600px;
-            margin: 0 auto 45px; /* Menos espacio antes de botones */
-            transition: color 0.4s ease;
+            margin: 0 auto 45px;
         }
 
         .social-buttons {
             position: absolute;
-            top: calc(50% + 40px); /* Botones subidos */
+            top: calc(50% + 40px);
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -172,13 +165,20 @@
             border-radius: 28px;
             text-decoration: none;
             font-size: 1.15rem;
-            font-weight: 500;
+            font-weight: 400;
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(0,0,0,0.35);
             user-select: none;
         }
         .btn:hover {
             transform: translateY(-5px);
+        }
+
+        .btn i {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
+            font-size: 1.6rem;
+            font-weight: 900;
+            font-style: normal;
         }
 
         .btn-facebook { background: #1877F2; color: white; }
@@ -188,25 +188,21 @@
         body.modo-dia .btn-x { background: #ffffff; color: #000000; border: 1px solid #ddd; }
         .btn-whatsapp { background: #25D366; color: white; }
 
-        .btn i {
-            font-size: 1.6rem;
-        }
-
-        /* Estilos para elementos que llueven desde la altura del botón de tema */
         .elemento-lluvia {
             position: fixed;
             pointer-events: none;
             animation: lluvia 3s ease-in forwards;
             z-index: 500;
-            top: 15px; /* Empiezan justo a la altura del botón sol/luna */
+            top: 15px;
         }
         .icono-lluvia {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
             font-size: 2rem;
         }
         .texto-2004 {
             font-size: 2rem;
-            font-weight: 700;
-            color: #e0e0e0;
+            font-weight: 300;
+            color: #ffffff;
         }
         body.modo-dia .texto-2004 {
             color: #111;
@@ -214,14 +210,6 @@
         .corazon-cafe {
             font-size: 1.5rem;
             color: #8B4513;
-        }
-        .texto-edgar-lluvia {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #e0e0e0;
-        }
-        body.modo-dia .texto-edgar-lluvia {
-            color: #111;
         }
 
         @keyframes lluvia {
@@ -234,14 +222,14 @@
             bottom: 12px;
             right: 20px;
             font-size: 0.85rem;
-            color: #333;
+            color: #cccccc;
             font-weight: 300;
             text-decoration: none;
             transition: color 0.4s ease;
             z-index: 1;
         }
         body.modo-dia .marca {
-            color: #aaa;
+            color: #555;
         }
     </style>
 </head>
@@ -260,27 +248,27 @@
         <a href="#" onclick="mostrarAcercaDe(event)">Acerca De</a>
     </div>
 
-    <h1><span class="enlace-edgar" onclick="lloverEdgar(event)">Edgar</span> Ortuño</h1>
-    <p>Bienvenid@ a mi página personal ✨</p>
+    <h1><a href="https://youtu.be/FZU8I9bPaTo" target="_blank" class="enlace-edgar">Edgar Ortuño</a></h1>
+    <p>Bienvenid@ a : Página..</p>
 
     <div class="social-buttons" id="contenedor-redes">
-        <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook" onclick="contarToquesIcono(event, 'facebook')">
+        <a href="https://www.facebook.com/share/1D9C18NVvc/" target="_blank" class="btn btn-facebook">
             <i class="fab fa-facebook-f"></i> Facebook
         </a>
         
-        <a href="https://www.instagram.com/edgar_ortuno" target="_blank" class="btn btn-instagram" onclick="contarToquesIcono(event, 'instagram')">
+        <a href="https://www.instagram.com/edgar_ortuno" target="_blank" class="btn btn-instagram">
             <i class="fab fa-instagram"></i> Instagram
         </a>
         
-        <a href="https://www.tiktok.com/@edgar_ortuno" target="_blank" class="btn btn-tiktok" onclick="contarToquesIcono(event, 'tiktok')">
+        <a href="https://www.tiktok.com/@edgar_ortuno" target="_blank" class="btn btn-tiktok">
             <i class="fab fa-tiktok"></i> TikTok
         </a>
 
-        <a href="https://x.com/edgar_ortuno_" target="_blank" class="btn btn-x" onclick="contarToquesIcono(event, 'x')">
+        <a href="https://x.com/edgar_ortuno_" target="_blank" class="btn btn-x">
             <i class="fa-brands fa-x-twitter"></i> X
         </a>
         
-        <a href="https://wa.me/59171274987" target="_blank" class="btn btn-whatsapp" onclick="contarToquesIcono(event, 'whatsapp')">
+        <a href="https://wa.me/59171274987" target="_blank" class="btn btn-whatsapp">
             <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
     </div>
@@ -290,19 +278,8 @@
     <script>
         const menu = document.getElementById('miMenu');
         const iconoTema = document.getElementById('icono-tema');
-        let contadorToquesIcono = 0;
-        let ultimoIcono = null;
         let contadorToquesVacio = 0;
-        let temporizadorIcono;
         let temporizadorVacio;
-
-        const iconos = {
-            facebook: '<i class="fab fa-facebook-f"></i>',
-            instagram: '<i class="fab fa-instagram"></i>',
-            tiktok: '<i class="fab fa-tiktok"></i>',
-            x: '<i class="fa-brands fa-x-twitter"></i>',
-            whatsapp: '<i class="fab fa-whatsapp"></i>'
-        };
 
         function cambiarTema() {
             document.body.classList.toggle('modo-dia');
@@ -333,39 +310,6 @@
             event.stopPropagation();
             menu.classList.remove('activo');
             crearLluvia('corazon-cafe', '🤎', 30);
-        }
-
-        function lloverEdgar(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            crearLluvia('texto-edgar-lluvia', 'Edgar', 25);
-            setTimeout(() => {
-                window.open('https://youtu.be/FZU8I9bPaTo', '_blank');
-            }, 2000);
-        }
-
-        function contarToquesIcono(event, tipo) {
-            event.preventDefault();
-            event.stopPropagation();
-            
-            if (ultimoIcono !== tipo) {
-                contadorToquesIcono = 0;
-                ultimoIcono = tipo;
-            }
-            
-            contadorToquesIcono++;
-            clearTimeout(temporizadorIcono);
-            
-            temporizadorIcono = setTimeout(() => {
-                contadorToquesIcono = 0;
-                ultimoIcono = null;
-            }, 1000);
-
-            if (contadorToquesIcono === 3) {
-                contadorToquesIcono = 0;
-                ultimoIcono = null;
-                crearLluvia('icono-lluvia', iconos[tipo], 35);
-            }
         }
 
         document.addEventListener('click', function(e) {
